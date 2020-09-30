@@ -1,6 +1,6 @@
-package fz;
+package fehlzeiten_orga;
 
-
+import java.util.Date;
 
 public class Fehlzeiten {
 
@@ -32,7 +32,7 @@ public class Fehlzeiten {
   public Date getFehltagebis() {
 	  return fehltagebis;
   }
-  public void setFehltagevon(Date fehltagebis){
+  public void setFehltagebis(Date fehltagebis){
 	  this.fehltagebis = fehltagebis;
   }
   public int getFehlstundenvon() {
