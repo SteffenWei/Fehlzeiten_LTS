@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -26,6 +27,7 @@ import java.awt.event.MouseEvent;
 
 
 public class GUI extends JFrame {
+	public DefaultComboBoxModel personjcmodel = new DefaultComboBoxModel();
 	public JComboBox persontxt = new JComboBox();
 	public String lehrercomboliste[];
 	static List<Buecher> blist = new ArrayList<Buecher>();
@@ -81,14 +83,6 @@ setup();
 		tabbedPane.addTab("Fehlzeiten", null, panelfz, null);
 		panelfz.setLayout(null);
 		
-		String[] lehrercomboliste = new String[blist.size()];
-		
-		//JComboBox persontxt = new JComboBox(lehrercomboliste);
-		
-		
-		
-	
-		
 		JComboBox grundtxt = new JComboBox();
 		grundtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		grundtxt.setBounds(163, 93, 200, 59);
@@ -121,7 +115,6 @@ setup();
 		JButton btnrefresh = new JButton("aktualisieren");
 		btnrefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				persontxt.removeAllItems();
 				setup();
 			}
 		});
@@ -170,6 +163,16 @@ setup();
 		label_1.setBounds(10, 441, 131, 50);
 		panelfz.add(label_1);
 		
+		JButton btnLschen = new JButton("l\u00F6schen");
+		btnLschen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				personjcmodel.removeAllElements();
+			}
+		});
+		btnLschen.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnLschen.setBounds(373, 93, 200, 50);
+		panelfz.add(btnLschen);
+		
 		JPanel panellul = new JPanel();
 		tabbedPane.addTab("LehrerInnen", null, panellul, null);
 		panellul.setLayout(null);
@@ -181,9 +184,10 @@ setup();
 	
 	public void setup(){
         System.out.println("hi");
-		
-        persontxt.removeAllItems();
         
+        persontxt.removeAllItems();
+        personjcmodel.removeAllElements();
+  
 		Buecher btemp2 = new Buecher("herr pinther","Herr Pinther","Mathe",0,13678,1);
 		blist.add(btemp2);
 		Buecher btemp3 = new Buecher("weidmann","Herr Mertens","Mathe",0,13679,2);
@@ -192,8 +196,12 @@ setup();
 		for(int i = 0; i<blist.size();i++){
 			Buecher btemp1 = blist.get(i);
 			 System.out.println(btemp1.getName());
-			persontxt.addItem(btemp1.getName());
+			 //persontxt.addItem(btemp1.getName());
+			 personjcmodel.addElement(btemp1.getName());
+			 
+
 		}
+		persontxt.setModel(personjcmodel);
 	}
 }
 
