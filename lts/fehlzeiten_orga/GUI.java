@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -27,8 +28,10 @@ import java.awt.event.MouseEvent;
 
 
 public class GUI extends JFrame {
-	public DefaultComboBoxModel personjcmodel = new DefaultComboBoxModel();
 	public JComboBox persontxt = new JComboBox();
+	public Object[] arraypers;
+	DefaultComboBoxModel personmodel = new DefaultComboBoxModel();
+	public List<String> personri = new ArrayList<String>();
 	public String lehrercomboliste[];
 	static List<Buecher> blist = new ArrayList<Buecher>();
 	private String[] listeg = {"hi","Hallo","soos"};
@@ -46,7 +49,7 @@ public class GUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI frame = new GUI();
+					GUItest frame = new GUItest();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +63,7 @@ public class GUI extends JFrame {
 	 */
 	public GUI() {
 		
-setup();
+
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,14 +79,43 @@ setup();
 		
 		JPanel panelfz = new JPanel();
 		
-		persontxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		persontxt.setBounds(163, 23, 200, 59);
-		panelfz.add(persontxt);
+		
 		
 		tabbedPane.addTab("Fehlzeiten", null, panelfz, null);
 		panelfz.setLayout(null);
 		
-		JComboBox grundtxt = new JComboBox();
+
+		
+		
+//arraytrickserei
+		
+		String[] lehrercomboliste = new String[blist.size()];
+		
+		
+		Buecher btemp2 = new Buecher("herr pinther","Herr Pinther","Mathe",0,13678,1);
+		blist.add(btemp2);
+		Buecher btemp3 = new Buecher("weidmann","Herr Mertens","Mathe",0,13679,2);
+		blist.add(btemp3);
+		
+		for(int i = 0; i<blist.size();i++){
+			Buecher btemp1 = blist.get(i);
+			personri.add(btemp1.getName());
+		}
+		Object[] arraypers = personri.toArray();
+		JComboBox persontxttst = new JComboBox(arraypers);
+        System.out.println( Arrays.toString(arraypers) );
+	
+        
+ //guisetupzeugs
+		JPanel panellul = new JPanel();
+		tabbedPane.addTab("LehrerInnen", null, panellul, null);
+		panellul.setLayout(null);
+		
+		JPanel panellist = new JPanel();
+		tabbedPane.addTab("Liste", null, panellist, null);
+		panellist.setLayout(null);
+		
+		JComboBox grundtxt = new JComboBox(personri.toArray());
 		grundtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		grundtxt.setBounds(163, 93, 200, 59);
 		panelfz.add(grundtxt);
@@ -112,16 +144,9 @@ setup();
 		stundebistxt.setBounds(163, 441, 200, 59);
 		panelfz.add(stundebistxt);
 		
-		JButton btnrefresh = new JButton("aktualisieren");
-		btnrefresh.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setup();
-			}
-		});
-		
-		btnrefresh.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnrefresh.setBounds(400, 27, 200, 50);
-		panelfz.add(btnrefresh);
+		persontxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		persontxt.setBounds(163, 23, 200, 59);
+		panelfz.add(persontxt);
 		
 		JLabel lblLehrerinn = new JLabel("LehrerInn:");
 		lblLehrerinn.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -162,46 +187,82 @@ setup();
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		label_1.setBounds(10, 441, 131, 50);
 		panelfz.add(label_1);
+
 		
-		JButton btnLschen = new JButton("l\u00F6schen");
-		btnLschen.addActionListener(new ActionListener() {
+//buttons
+		JButton btntest = new JButton("test");
+		btntest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for(int i = 0; i<blist.size();i++){
+					Buecher btemp1 = blist.get(i);
+					personri.add(btemp1.getName());
+				}
+				//System.out.println(personri.toArray());
+				
+				Object[] arraypers = personri.toArray();
+				JComboBox persontxttst = new JComboBox(arraypers);
+		        System.out.println( Arrays.toString(arraypers) );
+                
+			}});
+		btntest.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btntest.setBounds(410, 97, 200, 50);
+		panelfz.add(btntest);
+		
+		JButton btntest2 = new JButton("test2");
+		btntest2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				personjcmodel.removeAllElements();
+				Buecher btemp4 = new Buecher("mankel","Herr Mertens","Mathe",0,13679,2);
+				blist.add(btemp4);
+				
+				while(personri.size() > 0) {
+					  personri.remove(0);
+					}
+				for(int i = 0; i<blist.size();i++){
+					Buecher btemp1 = blist.get(i);
+					personri.add(btemp1.getName());
+				}
+				Object[] arraypers = personri.toArray();
+				System.out.println( Arrays.toString(arraypers) );
 			}
 		});
-		btnLschen.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnLschen.setBounds(373, 93, 200, 50);
-		panelfz.add(btnLschen);
+		btntest2.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btntest2.setBounds(410, 175, 200, 50);
+		panelfz.add(btntest2);
 		
-		JPanel panellul = new JPanel();
-		tabbedPane.addTab("LehrerInnen", null, panellul, null);
-		panellul.setLayout(null);
+		JButton btnrefresh = new JButton("aktualisieren");
+		btnrefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+	
+				setup();
+			}
+		});
+		btnrefresh.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnrefresh.setBounds(400, 27, 200, 50);
+		panelfz.add(btnrefresh);
 		
-		JPanel panellist = new JPanel();
-		tabbedPane.addTab("Liste", null, panellist, null);
-		panellist.setLayout(null);
+		
+//setupzeugs und so
+			setup();
+			
 	}
 	
 	public void setup(){
         System.out.println("hi");
         
-        persontxt.removeAllItems();
-        personjcmodel.removeAllElements();
-  
-		Buecher btemp2 = new Buecher("herr pinther","Herr Pinther","Mathe",0,13678,1);
-		blist.add(btemp2);
-		Buecher btemp3 = new Buecher("weidmann","Herr Mertens","Mathe",0,13679,2);
-		blist.add(btemp3);
-		
+        
+        while(personri.size() > 0) {
+			  personri.remove(0);
+			}
 		for(int i = 0; i<blist.size();i++){
 			Buecher btemp1 = blist.get(i);
-			 System.out.println(btemp1.getName());
-			 //persontxt.addItem(btemp1.getName());
-			 personjcmodel.addElement(btemp1.getName());
-			 
-
+			personri.add(btemp1.getName());
 		}
-		persontxt.setModel(personjcmodel);
+		Object[] arraypers = personri.toArray();
+		System.out.println( Arrays.toString(arraypers) );
+		persontxt.setModel(new DefaultComboBoxModel(arraypers));
+		
+		
 	}
-}
+	
+	}
 

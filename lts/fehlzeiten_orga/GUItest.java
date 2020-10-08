@@ -28,10 +28,10 @@ import java.awt.event.MouseEvent;
 
 
 public class GUItest extends JFrame {
+	public JComboBox persontxt = new JComboBox();
 	public Object[] arraypers;
 	DefaultComboBoxModel personmodel = new DefaultComboBoxModel();
 	public List<String> personri = new ArrayList<String>();
-	//public JComboBox persontxt = new JComboBox();
 	public String lehrercomboliste[];
 	static List<Buecher> blist = new ArrayList<Buecher>();
 	private String[] listeg = {"hi","Hallo","soos"};
@@ -63,7 +63,7 @@ public class GUItest extends JFrame {
 	 */
 	public GUItest() {
 		
-//setup();
+
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,9 +84,13 @@ public class GUItest extends JFrame {
 		tabbedPane.addTab("Fehlzeiten", null, panelfz, null);
 		panelfz.setLayout(null);
 		
+
+		
+		
+//arraytrickserei
+		
 		String[] lehrercomboliste = new String[blist.size()];
 		
-		//JComboBox persontxt = new JComboBox(lehrercomboliste);
 		
 		Buecher btemp2 = new Buecher("herr pinther","Herr Pinther","Mathe",0,13678,1);
 		blist.add(btemp2);
@@ -97,14 +101,19 @@ public class GUItest extends JFrame {
 			Buecher btemp1 = blist.get(i);
 			personri.add(btemp1.getName());
 		}
-		//System.out.println(personri.toArray());
-		
 		Object[] arraypers = personri.toArray();
 		JComboBox persontxttst = new JComboBox(arraypers);
         System.out.println( Arrays.toString(arraypers) );
-		
-        DefaultComboBoxModel personmodel = new DefaultComboBoxModel(arraypers);
 	
+        
+ //guisetupzeugs
+		JPanel panellul = new JPanel();
+		tabbedPane.addTab("LehrerInnen", null, panellul, null);
+		panellul.setLayout(null);
+		
+		JPanel panellist = new JPanel();
+		tabbedPane.addTab("Liste", null, panellist, null);
+		panellist.setLayout(null);
 		
 		JComboBox grundtxt = new JComboBox(personri.toArray());
 		grundtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -135,23 +144,9 @@ public class GUItest extends JFrame {
 		stundebistxt.setBounds(163, 441, 200, 59);
 		panelfz.add(stundebistxt);
 		
-		JButton btnrefresh = new JButton("aktualisieren");
-		btnrefresh.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-	
-				setup();
-			}
-		});
-		
-		JComboBox persontxt = new JComboBox(personmodel);
 		persontxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		persontxt.setBounds(163, 23, 200, 59);
 		panelfz.add(persontxt);
-		persontxt.setModel(personmodel);
-		
-		btnrefresh.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnrefresh.setBounds(400, 27, 200, 50);
-		panelfz.add(btnrefresh);
 		
 		JLabel lblLehrerinn = new JLabel("LehrerInn:");
 		lblLehrerinn.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -192,7 +187,9 @@ public class GUItest extends JFrame {
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		label_1.setBounds(10, 441, 131, 50);
 		panelfz.add(label_1);
+
 		
+//buttons
 		JButton btntest = new JButton("test");
 		btntest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -232,18 +229,26 @@ public class GUItest extends JFrame {
 		btntest2.setBounds(410, 175, 200, 50);
 		panelfz.add(btntest2);
 		
-		JPanel panellul = new JPanel();
-		tabbedPane.addTab("LehrerInnen", null, panellul, null);
-		panellul.setLayout(null);
+		JButton btnrefresh = new JButton("aktualisieren");
+		btnrefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+	
+				setup();
+			}
+		});
+		btnrefresh.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnrefresh.setBounds(400, 27, 200, 50);
+		panelfz.add(btnrefresh);
 		
-		JPanel panellist = new JPanel();
-		tabbedPane.addTab("Liste", null, panellist, null);
-		panellist.setLayout(null);
+		
+//setupzeugs und so
+			setup();
+			
 	}
 	
 	public void setup(){
         System.out.println("hi");
-		
+        
         
         while(personri.size() > 0) {
 			  personri.remove(0);
@@ -254,34 +259,11 @@ public class GUItest extends JFrame {
 		}
 		Object[] arraypers = personri.toArray();
 		System.out.println( Arrays.toString(arraypers) );
+		persontxt.setModel(new DefaultComboBoxModel(arraypers));
 		
 		
 	}
 	
-	
-	
-        //persontxt.removeAllItems();
-        
-		//Buecher btemp2 = new Buecher("herr pinther","Herr Pinther","Mathe",0,13678,1);
-		//blist.add(btemp2);
-		//Buecher btemp3 = new Buecher("weidmann","Herr Mertens","Mathe",0,13679,2);
-		//blist.add(btemp3);
-        
-		
-		//for(int i = 0; i<blist.size();i++){
-		//	Buecher btemp1 = blist.get(i);
-		//	personri.add(btemp1.getName());
-		//}
-		//System.out.println(personri.toArray());
-		
-		//Object[] arraypers = personri.toArray();
-		//JComboBox persontxttst = new JComboBox(arraypers);
-       // System.out.println( Arrays.toString(arraypers) );
-		
-	//	for(int i = 0; i<blist.size();i++){
-	//		Buecher btemp1 = blist.get(i);
-		//	 System.out.println(btemp1.getName());
-		//	persontxt.addItem(btemp1.getName());
-		//}
 	}
+
 
