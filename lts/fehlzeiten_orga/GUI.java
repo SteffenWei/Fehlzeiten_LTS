@@ -28,7 +28,7 @@ import java.awt.event.MouseEvent;
 
 
 public class GUI extends JFrame {
-	public String[] grundarray = {"kot"};
+	public String[] grundarray = {"Krankheit", "Durchfall", "keine Lust", "Simon"};
 	public JComboBox persontxt = new JComboBox();
 	public Object[] arraypers;
 	public List<String> personri = new ArrayList<String>();
@@ -49,7 +49,7 @@ public class GUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUItest frame = new GUItest();
+					GUI frame = new GUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +64,7 @@ public class GUI extends JFrame {
 	public GUI() {
 		
 
-		
+		System.out.println("running GUI");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
@@ -188,6 +188,7 @@ public class GUI extends JFrame {
 
 		
 //buttons
+	/**test und test2 sind temporär*/
 		JButton btntest = new JButton("test");
 		btntest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
