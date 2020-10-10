@@ -34,16 +34,13 @@ public class GUI extends JFrame {
 	public List<String> personri = new ArrayList<String>();
 	public String lehrercomboliste[];
 	static List<Buecher> blist = new ArrayList<Buecher>();
-	private String[] listeg = {"hi","Hallo","soos"};
 	private JPanel contentPane;
 	private JTextField datumvontxt;
 	private JTextField datumbistxt;
 	private JTextField stundevontxt;
 	private JTextField stundebistxt;
 
-	/**
-	 * Launch the application.
-	 */
+//Start des Programms
 	public static void main(String[] args) {
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -58,35 +55,9 @@ public class GUI extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+//Frame erstellen
 	public GUI() {
-		
-
-		System.out.println("running GUI");
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 600);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 864, 539);
-		contentPane.add(tabbedPane);
-		
-		JPanel panelfz = new JPanel();
-		
-		
-		
-		tabbedPane.addTab("Fehlzeiten", null, panelfz, null);
-		panelfz.setLayout(null);
-		
-
-		
-		
+			
 //arraytrickserei
 		
 		/**Buecher ist temporär und wird später durch Lehrer ausgetauscht*/
@@ -102,9 +73,29 @@ public class GUI extends JFrame {
 		}
 		Object[] arraypers = personri.toArray();
         System.out.println( Arrays.toString(arraypers) );
+       
 	
         
  //guisetupzeugs
+
+
+		System.out.println("running GUI");
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 900, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 11, 864, 539);
+		contentPane.add(tabbedPane);
+		
+		JPanel panelfz = new JPanel();
+		tabbedPane.addTab("Fehlzeiten", null, panelfz, null);
+		panelfz.setLayout(null);
+		
 		JPanel panellul = new JPanel();
 		tabbedPane.addTab("LehrerInnen", null, panellul, null);
 		panellul.setLayout(null);
@@ -192,16 +183,22 @@ public class GUI extends JFrame {
 		JButton btntest = new JButton("test");
 		btntest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				/**ersetzt einen Lehrer mit einem anderen*/
+		        Buecher kkkktemp = new Buecher("mankeljunior","Herr Mertens","Mathe",0,13679,2);
+                blist.set(0, kkkktemp);
+                
+				while(personri.size() > 0) {
+					  personri.remove(0);
+					}
 				for(int i = 0; i<blist.size();i++){
 					Buecher btemp1 = blist.get(i);
 					personri.add(btemp1.getName());
 				}
-				//System.out.println(personri.toArray());
 				
 				Object[] arraypers = personri.toArray();
 				JComboBox persontxttst = new JComboBox(arraypers);
 		        System.out.println( Arrays.toString(arraypers) );
-                
+		        
 			}});
 		btntest.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btntest.setBounds(410, 97, 200, 50);
@@ -210,6 +207,7 @@ public class GUI extends JFrame {
 		JButton btntest2 = new JButton("test2");
 		btntest2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/**fügt einen neuen Lehrer hinzu*/
 				Buecher btemp4 = new Buecher("mankel","Herr Mertens","Mathe",0,13679,2);
 				blist.add(btemp4);
 				
