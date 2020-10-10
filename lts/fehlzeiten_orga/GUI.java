@@ -28,9 +28,9 @@ import java.awt.event.MouseEvent;
 
 
 public class GUI extends JFrame {
+	public String[] grundarray = {"kot"};
 	public JComboBox persontxt = new JComboBox();
 	public Object[] arraypers;
-	DefaultComboBoxModel personmodel = new DefaultComboBoxModel();
 	public List<String> personri = new ArrayList<String>();
 	public String lehrercomboliste[];
 	static List<Buecher> blist = new ArrayList<Buecher>();
@@ -89,8 +89,7 @@ public class GUI extends JFrame {
 		
 //arraytrickserei
 		
-		String[] lehrercomboliste = new String[blist.size()];
-		
+		/**Buecher ist temporär und wird später durch Lehrer ausgetauscht*/
 		
 		Buecher btemp2 = new Buecher("herr pinther","Herr Pinther","Mathe",0,13678,1);
 		blist.add(btemp2);
@@ -102,7 +101,6 @@ public class GUI extends JFrame {
 			personri.add(btemp1.getName());
 		}
 		Object[] arraypers = personri.toArray();
-		JComboBox persontxttst = new JComboBox(arraypers);
         System.out.println( Arrays.toString(arraypers) );
 	
         
@@ -115,7 +113,7 @@ public class GUI extends JFrame {
 		tabbedPane.addTab("Liste", null, panellist, null);
 		panellist.setLayout(null);
 		
-		JComboBox grundtxt = new JComboBox(personri.toArray());
+		JComboBox grundtxt = new JComboBox(grundarray);
 		grundtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		grundtxt.setBounds(163, 93, 200, 59);
 		panelfz.add(grundtxt);
@@ -241,14 +239,14 @@ public class GUI extends JFrame {
 		panelfz.add(btnrefresh);
 		
 		
+		
 //setupzeugs und so
 			setup();
 			
 	}
 	
 	public void setup(){
-        System.out.println("hi");
-        
+        System.out.println("aktualisiert personen:");
         
         while(personri.size() > 0) {
 			  personri.remove(0);
