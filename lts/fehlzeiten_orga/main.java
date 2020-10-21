@@ -29,7 +29,9 @@ public static void main(String args[]){
 public static String ksuche(){ 
 
 	
-	
+public void fzspeichern(String name, String grund,date datumvon, date datumbis, int zeitvon, int zeitbis){
+	Lehrer lehrertemp1 = new Lehrer(name,grund,datumvon,datumbis,zeitvon,zeitbis);
+}	
 	
 	
 	
