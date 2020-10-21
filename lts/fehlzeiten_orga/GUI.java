@@ -62,19 +62,11 @@ public class GUI extends JFrame {
 		
 		/**Buecher ist temporär und wird später durch Lehrer ausgetauscht*/
 		
+		
 		Buecher btemp2 = new Buecher("herr pinther","Herr Pinther","Mathe",0,13678,1);
 		blist.add(btemp2);
 		Buecher btemp3 = new Buecher("weidmann","Herr Mertens","Mathe",0,13679,2);
 		blist.add(btemp3);
-		
-		for(int i = 0; i<blist.size();i++){
-			Buecher btemp1 = blist.get(i);
-			personri.add(btemp1.getName());
-		}
-		Object[] arraypers = personri.toArray();
-        System.out.println( Arrays.toString(arraypers) );
-       
-	
         
  //guisetupzeugs
 
@@ -208,18 +200,7 @@ public class GUI extends JFrame {
 		btntest2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/**fügt einen neuen Lehrer hinzu*/
-				Buecher btemp4 = new Buecher("mankel","Herr Mertens","Mathe",0,13679,2);
-				blist.add(btemp4);
-				
-				while(personri.size() > 0) {
-					  personri.remove(0);
-					}
-				for(int i = 0; i<blist.size();i++){
-					Buecher btemp1 = blist.get(i);
-					personri.add(btemp1.getName());
-				}
-				Object[] arraypers = personri.toArray();
-				System.out.println( Arrays.toString(arraypers) );
+				save("mankel","Herr Mertens","Mathe",0,13679,2);
 			}
 		});
 		btntest2.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -241,8 +222,11 @@ public class GUI extends JFrame {
 		
 //setupzeugs und so
 			setup();
+			say("Setup fertig!");
 			
 	}
+	
+	
 	
 	public void setup(){
         System.out.println("aktualisiert personen:");
@@ -261,5 +245,15 @@ public class GUI extends JFrame {
 		
 	}
 	
+	public void say(String a){System.out.println(a);}
+	
+	public void save(String a,String b,String c, int d, int e, int f){
+		Buecher btemp4 = new Buecher(a,b,c,d,e,f);
+		blist.add(btemp4);
+		System.out.println("gespeichert: " + a);
 	}
+	
+	}
+
+
 
