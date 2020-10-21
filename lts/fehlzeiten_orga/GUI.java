@@ -237,6 +237,15 @@ public class GUI extends JFrame {
 		btnrefresh.setBounds(400, 27, 200, 50);
 		panelfz.add(btnrefresh);
 		
+		JButton btnTest = new JButton("test3");
+		btnTest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				listerefresh();
+			}
+		});
+		btnTest.setBounds(455, 272, 89, 23);
+		panelfz.add(btnTest);
+		
 
 		
 
@@ -274,6 +283,21 @@ public class GUI extends JFrame {
 		Buecher btemp4 = new Buecher(a,b,c,d,e,f);
 		blist.add(btemp4);
 		System.out.println("gespeichert: " + a);
+	}
+	
+	public void listerefresh(){
+		while(tableModel.getRowCount() > 0) {
+			tableModel.removeRow(0);
+			}
+		
+		for(int i = 0; i<blist.size();i++){
+			Buecher btemp1 = blist.get(i);
+            String nametemp = btemp1.getName();
+            Object[] tbltemp1 = {nametemp, "01.01.2020", "Simon", 1,20,5};
+            
+            tableModel.addRow(tbltemp1);
+		}
+		
 	}
 	}
 
