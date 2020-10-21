@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTabbedPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -24,10 +25,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTable;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 
 
 public class GUI extends JFrame {
+	public String col[] = {"Name","Tag","Grund", "Personalnr", "Zeit", "test"};
+	public DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 	public String[] grundarray = {"Krankheit", "Durchfall", "keine Lust", "Simon"};
 	public JComboBox persontxt = new JComboBox();
 	public Object[] arraypers;
@@ -39,6 +45,9 @@ public class GUI extends JFrame {
 	private JTextField datumbistxt;
 	private JTextField stundevontxt;
 	private JTextField stundebistxt;
+	private JTable table;
+	private JTextField textField;
+	private JTable table_1;
 
 //Start des Programms
 	public static void main(String[] args) {
@@ -58,15 +67,21 @@ public class GUI extends JFrame {
 //Frame erstellen
 	public GUI() {
 			
-//arraytrickserei
 		
 		/**Buecher ist temporär und wird später durch Lehrer ausgetauscht*/
-		
 		
 		Buecher btemp2 = new Buecher("herr pinther","Herr Pinther","Mathe",0,13678,1);
 		blist.add(btemp2);
 		Buecher btemp3 = new Buecher("weidmann","Herr Mertens","Mathe",0,13679,2);
 		blist.add(btemp3);
+		
+		for(int i = 0; i<blist.size();i++){
+			Buecher btemp1 = blist.get(i);
+            String nametemp = btemp1.getName();
+            Object[] tbltemp1 = {nametemp, "01.01.2020", "Simon", 1,20,5};
+            
+            tableModel.addRow(tbltemp1);
+		}
         
  //guisetupzeugs
 
@@ -92,9 +107,13 @@ public class GUI extends JFrame {
 		tabbedPane.addTab("LehrerInnen", null, panellul, null);
 		panellul.setLayout(null);
 		
-		JPanel panellist = new JPanel();
-		tabbedPane.addTab("Liste", null, panellist, null);
-		panellist.setLayout(null);
+		JScrollPane scrollPane = new JScrollPane();
+		tabbedPane.addTab("New tab", null, scrollPane, null);
+		
+		table_1 = new JTable(tableModel);
+		scrollPane.setViewportView(table_1);
+
+		
 		
 		JComboBox grundtxt = new JComboBox(grundarray);
 		grundtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -218,6 +237,10 @@ public class GUI extends JFrame {
 		btnrefresh.setBounds(400, 27, 200, 50);
 		panelfz.add(btnrefresh);
 		
+
+		
+
+		
 		
 		
 //setupzeugs und so
@@ -252,7 +275,6 @@ public class GUI extends JFrame {
 		blist.add(btemp4);
 		System.out.println("gespeichert: " + a);
 	}
-	
 	}
 
 
