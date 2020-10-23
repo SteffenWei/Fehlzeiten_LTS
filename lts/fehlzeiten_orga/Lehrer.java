@@ -3,7 +3,7 @@ package fehlzeiten_orga;
 import java.util.List;
 import java.util.ArrayList;
 
-public class lehrer {
+public class Lehrer {
 		
 		private String nname;
 		private String vname;
@@ -16,7 +16,7 @@ public class lehrer {
 		
 		private List <Fehlzeiten> flist = new ArrayList<Fehlzeiten> ();
 		
-		public lehrer(String nname, String vname, String krzl, String persnr, String plz, String strasse, String telnr, String mail)
+		public Lehrer(String nname, String vname, String krzl, String persnr, String plz, String strasse, String telnr, String mail)
 		{
 		super();
 		this.nname = nname;
@@ -75,11 +75,11 @@ public class lehrer {
 		public String toString()
 		{return nname + "," + vname + "," + krzl + "," + persnr + "," + plz + "," + strasse + "," + telnr + "," + mail;}
 		//
-		static List <lehrer> llist = new ArrayList<lehrer>();
+		static List <Lehrer> llist = new ArrayList<Lehrer>();
 		//
 		public static void main(String[] args) {
 			
-		lehrer l0 = new lehrer("Pinther", "Hubertus", "PINT", "69", "66666, Hades", "Felder von Asphodel 66", "66666/666420", "h.pinther@lahntalschule.de");
+		Lehrer l0 = new Lehrer("Pinther", "Hubertus", "PINT", "69", "66666, Hades", "Felder von Asphodel 66", "66666/666420", "h.pinther@lahntalschule.de");
 		llist.add(l0);
 		System.out.println(llist.get(0).toString());
 		System.out.println(llist.get(0).getNname());
