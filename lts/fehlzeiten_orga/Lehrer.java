@@ -27,6 +27,7 @@ public class Lehrer {
 		this.strasse = strasse;
 		this.telnr = telnr;
 		this.mail = mail;
+		this.flist = null;
 	
 		}
 		
