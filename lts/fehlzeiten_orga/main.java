@@ -1,12 +1,9 @@
 package fehlzeiten_orga;
 
-
-
-
-
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -25,17 +22,15 @@ public static void main(String args[]){
 	
 }
 
-
-public static String ksuche(){ 
-
-	
-public void fzspeichern(String name, String grund,date datumvon, date datumbis, int zeitvon, int zeitbis){
+public void fzspeichern(String name, String grund,Date datumvon, Date datumbis, int zeitvon, int zeitbis){
 	Lehrer lehrertemp1 = new Lehrer(name,grund,datumvon,datumbis,zeitvon,zeitbis);
 }	
-	
-	
+
+public static String ksuche(){
+	return null; 
 	
 }
+
 private static void eingabeLuL(String tmpvname, String tmpnname, String tmpkrzl, int tmppersnr, int tmptelnr, String tmpmail, int  tmpfz){
 	
 	
@@ -52,7 +47,7 @@ private static void eingabeLuL(String tmpvname, String tmpnname, String tmpkrzl,
 protected Lehrer suche(String tmpname){
 	
 	
-	return ;
+	return null;
 }
 
 private static void ausgabe(){
