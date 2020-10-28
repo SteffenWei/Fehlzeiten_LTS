@@ -2,6 +2,7 @@ package fehlzeiten_orga;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Lehrer {
 		
@@ -29,6 +30,18 @@ public class Lehrer {
 		this.mail = mail;
 		this.flist = null;
 	
+		}
+		
+		/*
+		 * Ihr müsstet noch eine Methode einbauen, mit der man Fehlzeiten hinzufügen kann.
+		 * Diese ruft den Konstruktor Fehlzeiten 
+		 * public Fehlzeiten(Date fehltagevon,Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String fehlgrund, String grundsonstige)
+		 * aus der Klasse Fehlzeiten auf.
+		 * Die Variablen müssen in den Methodenaufruf und werden beim Aufruf mitgegeben.
+		 */
+		
+		public void addFehlzeiten(Date fehltagevon,Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String fehlgrund, String grundsonstige){
+			//Vorlage
 		}
 		
 		public String getNname() 

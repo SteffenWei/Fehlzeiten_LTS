@@ -24,6 +24,13 @@ public static void main(String args[]){
 
 public void fzspeichern(String name, String grund,Date datumvon, Date datumbis, int zeitvon, int zeitbis){
 	Lehrer lehrertemp1 = new Lehrer(name,grund,datumvon,datumbis,zeitvon,zeitbis);
+	
+	/*
+	 * Hier müsst ihr die Lehrerliste durchsuchen Methode suche(tmpname) gibt es bereits
+	 * dann auf das gefundene Lehrerobjekt die
+	 * 
+	 */
+	
 }	
 
 public static String ksuche(){
@@ -45,6 +52,17 @@ private static void eingabeLuL(String tmpvname, String tmpnname, String tmpkrzl,
 }
 
 protected Lehrer suche(String tmpname){
+	
+	/*
+	 * Lehrer tmpLehrer = null;
+	 * for(int i = 0; i > Lehrerlist.size();i++){
+	 * 	if(Lerhrerlist.get(i).getName.equals(tmpname))
+	 * 	{
+	 * 	 tmpLehrer = Lehrerlist.get(i);
+	 * 	}
+	 * }
+	 * return tmpLehrer;
+	 */
 	
 	
 	return null;
