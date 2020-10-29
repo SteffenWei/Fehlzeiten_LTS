@@ -29,10 +29,10 @@ public class Main {
 
 	}
 
-	private static void eingabeLuL(String tmpvname, String tmpnname, String tmpkrzl, int tmppersnr, int tmptelnr,
-			String tmpmail, int tmpfz) {
+	private static void eingabeLuL(String tmpnname, String tmpvname, String tmpkrzl, String tmppersnr, String tmpplz,
+			String tmpstrasse, String tmptelnr, String tmpmail) {
 
-		Lehrer templehrer = new Lehrer(tmpvname, tmpnname, tmpkrzl, tmppersnr, tmptelnr, tmpmail, tmpfz);
+		Lehrer templehrer = new Lehrer(tmpnname, tmpvname, tmpkrzl, tmppersnr, tmpplz, tmpstrasse, tmptelnr, tmpmail);
 
 		Lehrerlist.add(templehrer);
 		

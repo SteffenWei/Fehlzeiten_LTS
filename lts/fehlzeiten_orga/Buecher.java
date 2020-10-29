@@ -1,6 +1,8 @@
 package fehlzeiten_orga;
 
-public class Buecher {
+import java.io.Serializable;
+
+public class Buecher implements Serializable{
 
 	private String name;
 	private String autor;

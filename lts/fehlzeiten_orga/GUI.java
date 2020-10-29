@@ -25,6 +25,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import javax.swing.JTable;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -39,7 +45,7 @@ public class GUI extends JFrame {
 	public Object[] arraypers;
 	public List<String> personri = new ArrayList<String>();
 	public String lehrercomboliste[];
-	static List<Buecher> blist = new ArrayList<Buecher>();
+	public static List<Buecher> blist = new ArrayList<Buecher>();
 	private JPanel contentPane;
 	private JTextField datumvontxt;
 	private JTextField datumbistxt;
@@ -237,14 +243,25 @@ public class GUI extends JFrame {
 		btnrefresh.setBounds(400, 27, 200, 50);
 		panelfz.add(btnrefresh);
 		
-		JButton btnTest = new JButton("test3");
-		btnTest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				listerefresh();
+		JButton btnsave = new JButton("speichern");
+		btnsave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				speichern();
 			}
 		});
-		btnTest.setBounds(455, 272, 89, 23);
-		panelfz.add(btnTest);
+		btnsave.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnsave.setBounds(410, 251, 200, 50);
+		panelfz.add(btnsave);
+		
+		JButton btnladen = new JButton("laden");
+		btnladen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				laden();
+			}
+		});
+		btnladen.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnladen.setBounds(410, 329, 200, 50);
+		panelfz.add(btnladen);
 		
 
 		
@@ -285,20 +302,45 @@ public class GUI extends JFrame {
 		System.out.println("gespeichert: " + a);
 	}
 	
-	public void listerefresh(){
-		while(tableModel.getRowCount() > 0) {
-			tableModel.removeRow(0);
-			}
-		
-		for(int i = 0; i<blist.size();i++){
-			Buecher btemp1 = blist.get(i);
-            String nametemp = btemp1.getName();
-            Object[] tbltemp1 = {nametemp, "01.01.2020", "Simon", 1,20,5};
-            
-            tableModel.addRow(tbltemp1);
-		}
-		
+	public void laden(){
+		try
+        {
+            FileInputStream fis = new FileInputStream("employeeData");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+ 
+            blist = (ArrayList) ois.readObject();
+ 
+            ois.close();
+            fis.close();
+        } 
+        catch (IOException ioe) 
+        {
+            ioe.printStackTrace();
+            return;
+        } 
+        catch (ClassNotFoundException c) 
+        {
+            System.out.println("Class not found");
+            c.printStackTrace();
+            return;
+        }
 	}
+
+    public void speichern(){
+    	 try
+         {
+             FileOutputStream fos = new FileOutputStream("employeeData");
+             ObjectOutputStream oos = new ObjectOutputStream(fos);
+             oos.writeObject(blist);
+             oos.close();
+             fos.close();
+         } 
+         catch (IOException ioe) 
+         {
+             ioe.printStackTrace();
+         }
+    }
+	
 	}
 
 
