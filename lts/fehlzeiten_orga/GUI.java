@@ -305,41 +305,6 @@ public class GUI extends JFrame {
 
 		
 //buttons
-	/**test und test2 sind temporär*/
-		JButton btntest = new JButton("test");
-		btntest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				/**ersetzt einen Lehrer mit einem anderen*/
-		        Buecher kkkktemp = new Buecher("mankeljunior","Herr Mertens","Mathe",0,13679,2);
-                blist.set(0, kkkktemp);
-                
-				while(personri.size() > 0) {
-					  personri.remove(0);
-					}
-				for(int i = 0; i<blist.size();i++){
-					Buecher btemp1 = blist.get(i);
-					personri.add(btemp1.getName());
-				}
-				
-				Object[] arraypers = personri.toArray();
-				JComboBox persontxttst = new JComboBox(arraypers);
-		        System.out.println( Arrays.toString(arraypers) );
-		        
-			}});
-		btntest.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btntest.setBounds(410, 97, 200, 50);
-		panelfz.add(btntest);
-		
-		JButton btntest2 = new JButton("test2");
-		btntest2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				/**fügt einen neuen Lehrer hinzu*/
-				save("mankel","Herr Mertens","Mathe",0,13679,2);
-			}
-		});
-		btntest2.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btntest2.setBounds(410, 175, 200, 50);
-		panelfz.add(btntest2);
 		
 		JButton btnrefresh = new JButton("aktualisieren");
 		btnrefresh.addActionListener(new ActionListener() {
@@ -351,16 +316,6 @@ public class GUI extends JFrame {
 		btnrefresh.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnrefresh.setBounds(400, 27, 200, 50);
 		panelfz.add(btnrefresh);
-		
-		JButton btnsave = new JButton("speichern");
-		btnsave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				speichern();
-			}
-		});
-		btnsave.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnsave.setBounds(410, 251, 200, 50);
-		panelfz.add(btnsave);
 		
 		JButton btnladen = new JButton("laden");
 		btnladen.addActionListener(new ActionListener() {
@@ -383,7 +338,7 @@ public class GUI extends JFrame {
 		
 		    Main.laden();
 			setup();
-			say("Setup fertig!");
+			System.out.println("Setup fertig!");
 			
 	}
 	
@@ -405,53 +360,7 @@ public class GUI extends JFrame {
 		
 		
 	}
-	
-	public void say(String a){System.out.println(a);}
-	
-	public void save(String a,String b,String c, int d, int e, int f){
-		Buecher btemp4 = new Buecher(a,b,c,d,e,f);
-		blist.add(btemp4);
-		System.out.println("gespeichert: " + a);
-	}
-	
-	public void laden(){
-		try
-        {
-            FileInputStream fis = new FileInputStream("employeeData");
-            ObjectInputStream ois = new ObjectInputStream(fis);
- 
-            blist = (ArrayList) ois.readObject();
- 
-            ois.close();
-            fis.close();
-        } 
-        catch (IOException ioe) 
-        {
-            ioe.printStackTrace();
-            return;
-        } 
-        catch (ClassNotFoundException c) 
-        {
-            System.out.println("Class not found");
-            c.printStackTrace();
-            return;
-        }
-	}
 
-    public void speichern(){
-    	 try
-         {
-             FileOutputStream fos = new FileOutputStream("employeeData");
-             ObjectOutputStream oos = new ObjectOutputStream(fos);
-             oos.writeObject(blist);
-             oos.close();
-             fos.close();
-         } 
-         catch (IOException ioe) 
-         {
-             ioe.printStackTrace();
-         }
-    }
 	}
 
 
