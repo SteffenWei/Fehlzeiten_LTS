@@ -44,8 +44,6 @@ public class GUI extends JFrame {
 	public JComboBox persontxt = new JComboBox();
 	public Object[] arraypers;
 	public List<String> personri = new ArrayList<String>();
-	public String lehrercomboliste[];
-	public static List<Buecher> blist = new ArrayList<Buecher>();
 	private JPanel contentPane;
 	private JTextField datumvontxt;
 	private JTextField datumbistxt;
@@ -80,23 +78,8 @@ public class GUI extends JFrame {
 
 //Frame erstellen
 	public GUI() {
-			
 		
-		/**Buecher ist temporär und wird später durch Lehrer ausgetauscht*/
 		
-		Buecher btemp2 = new Buecher("herr pinther","Herr Pinther","Mathe",0,13678,1);
-		blist.add(btemp2);
-		Buecher btemp3 = new Buecher("weidmann","Herr Mertens","Mathe",0,13679,2);
-		blist.add(btemp3);
-		
-		for(int i = 0; i<blist.size();i++){
-			Buecher btemp1 = blist.get(i);
-            String nametemp = btemp1.getName();
-            Object[] tbltemp1 = {nametemp, "01.01.2020", "Simon", 1,20,5};
-            
-            tableModel.addRow(tbltemp1);
-		}
-        
  //guisetupzeugs
 
 
@@ -338,6 +321,15 @@ public class GUI extends JFrame {
 		
 		    Main.laden();
 			setup();
+			
+			for(int i = 0; i<Main.Lehrerlist.size();i++){
+				Lehrer ltemp1 = Main.Lehrerlist.get(i);
+	            String nametemp = ltemp1.getNname();
+	            Object[] tbltemp1 = {nametemp, "01.01.2020", "Simon", 1,20,5};
+	            
+	            tableModel.addRow(tbltemp1);
+			}
+	        
 			System.out.println("Setup fertig!");
 			
 	}
