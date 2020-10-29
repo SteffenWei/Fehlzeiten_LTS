@@ -2,7 +2,7 @@ package fehlzeiten_orga;
 
 import java.util.Date;
 
-import fehlzeiten_orga.main;
+import fehlzeiten_orga.Main;
 
 public class Fehlzeiten {
 

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class main {
+public class Main {
 
 	public static List<Lehrer> Lehrerlist = new ArrayList<Lehrer>();
 
