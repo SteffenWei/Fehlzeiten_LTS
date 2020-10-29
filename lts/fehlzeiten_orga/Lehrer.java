@@ -1,10 +1,11 @@
 package fehlzeiten_orga;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Lehrer {
+public class Lehrer implements Serializable{
 
 	private String nname;
 	private String vname;

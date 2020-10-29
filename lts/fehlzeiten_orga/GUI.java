@@ -54,6 +54,14 @@ public class GUI extends JFrame {
 	private JTable table;
 	private JTextField textField;
 	private JTable table_1;
+	private JTextField vnametxt;
+	private JTextField nnametxt;
+	private JTextField strassetxt;
+	private JTextField plztxt;
+	private JTextField mailtxt;
+	private JTextField telnrtxt;
+	private JTextField persnrtxt;
+	private JTextField krzltxt;
 
 //Start des Programms
 	public static void main(String[] args) {
@@ -112,6 +120,107 @@ public class GUI extends JFrame {
 		JPanel panellul = new JPanel();
 		tabbedPane.addTab("LehrerInnen", null, panellul, null);
 		panellul.setLayout(null);
+		
+		vnametxt = new JTextField();
+		vnametxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		vnametxt.setColumns(10);
+		vnametxt.setBounds(142, 180, 200, 59);
+		panellul.add(vnametxt);
+		
+		nnametxt = new JTextField();
+		nnametxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		nnametxt.setColumns(10);
+		nnametxt.setBounds(142, 110, 200, 59);
+		panellul.add(nnametxt);
+		
+		strassetxt = new JTextField();
+		strassetxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		strassetxt.setColumns(10);
+		strassetxt.setBounds(517, 180, 200, 59);
+		panellul.add(strassetxt);
+		
+		plztxt = new JTextField();
+		plztxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		plztxt.setColumns(10);
+		plztxt.setBounds(517, 110, 200, 59);
+		panellul.add(plztxt);
+		
+		mailtxt = new JTextField();
+		mailtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		mailtxt.setColumns(10);
+		mailtxt.setBounds(517, 320, 200, 59);
+		panellul.add(mailtxt);
+		
+		telnrtxt = new JTextField();
+		telnrtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		telnrtxt.setColumns(10);
+		telnrtxt.setBounds(517, 250, 200, 59);
+		panellul.add(telnrtxt);
+		
+		persnrtxt = new JTextField();
+		persnrtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		persnrtxt.setColumns(10);
+		persnrtxt.setBounds(142, 320, 200, 59);
+		panellul.add(persnrtxt);
+		
+		krzltxt = new JTextField();
+		krzltxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		krzltxt.setColumns(10);
+		krzltxt.setBounds(142, 250, 200, 59);
+		panellul.add(krzltxt);
+		
+		JLabel lblNachname = new JLabel("Nachname");
+		lblNachname.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblNachname.setBounds(10, 119, 131, 50);
+		panellul.add(lblNachname);
+		
+		JLabel lblVorname = new JLabel("Vorname");
+		lblVorname.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblVorname.setBounds(10, 189, 131, 50);
+		panellul.add(lblVorname);
+		
+		JLabel lblKrzel = new JLabel("K\u00FCrzel");
+		lblKrzel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblKrzel.setBounds(10, 259, 131, 50);
+		panellul.add(lblKrzel);
+		
+		JLabel lblPersonalnr = new JLabel("PersonalNr.");
+		lblPersonalnr.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblPersonalnr.setBounds(10, 329, 131, 50);
+		panellul.add(lblPersonalnr);
+		
+		JLabel lblPlz = new JLabel("PLZ");
+		lblPlz.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblPlz.setBounds(408, 119, 131, 50);
+		panellul.add(lblPlz);
+		
+		JLabel lblStrae = new JLabel("Stra\u00DFe");
+		lblStrae.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblStrae.setBounds(408, 189, 131, 50);
+		panellul.add(lblStrae);
+		
+		JLabel lblTelnr = new JLabel("TelNr.");
+		lblTelnr.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblTelnr.setBounds(408, 259, 131, 50);
+		panellul.add(lblTelnr);
+		
+		JLabel lblMail = new JLabel("Mail");
+		lblMail.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblMail.setBounds(408, 329, 131, 50);
+		panellul.add(lblMail);
+		
+		JButton btnNeuenLehrerAnlegen = new JButton("neuen Lehrer anlegen");
+		btnNeuenLehrerAnlegen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Main.eingabeLuL(nnametxt.getText(), vnametxt.getText(), krzltxt.getText(), persnrtxt.getText(),
+						plztxt.getText(), strassetxt.getText(), telnrtxt.getText(), mailtxt.getText());
+				System.out.println(Main.Lehrerlist.get(0).getVname());
+				System.out.println("Lehrer "+ nnametxt.getText() +" gespeichert");
+			}
+		});
+		btnNeuenLehrerAnlegen.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnNeuenLehrerAnlegen.setBounds(24, 416, 285, 50);
+		panellul.add(btnNeuenLehrerAnlegen);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		tabbedPane.addTab("New tab", null, scrollPane, null);
@@ -256,7 +365,8 @@ public class GUI extends JFrame {
 		JButton btnladen = new JButton("laden");
 		btnladen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				laden();
+				//laden();
+				Main.laden();
 			}
 		});
 		btnladen.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -270,6 +380,8 @@ public class GUI extends JFrame {
 		
 		
 //setupzeugs und so
+		
+		    Main.laden();
 			setup();
 			say("Setup fertig!");
 			
@@ -283,9 +395,9 @@ public class GUI extends JFrame {
         while(personri.size() > 0) {
 			  personri.remove(0);
 			}
-		for(int i = 0; i<blist.size();i++){
-			Buecher btemp1 = blist.get(i);
-			personri.add(btemp1.getName());
+		for(int i = 0; i<Main.Lehrerlist.size();i++){
+			Lehrer ltemp1 = Main.Lehrerlist.get(i);
+			personri.add(ltemp1.getNname());
 		}
 		Object[] arraypers = personri.toArray();
 		System.out.println( Arrays.toString(arraypers) );
@@ -340,7 +452,6 @@ public class GUI extends JFrame {
              ioe.printStackTrace();
          }
     }
-	
 	}
 
 

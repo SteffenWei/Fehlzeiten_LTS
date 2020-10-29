@@ -2,6 +2,11 @@ package fehlzeiten_orga;
 
 import java.util.List;
 import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,7 +19,7 @@ public class Main {
 	}
 
 	public void fzspeichern(String name, String grund, Date datumvon, Date datumbis, int zeitvon, int zeitbis) {
-		Lehrer lehrertemp1 = new Lehrer(name, grund, datumvon, datumbis, zeitvon, zeitbis);
+		//Lehrer lehrertemp1 = new Lehrer(name, grund, datumvon, datumbis, zeitvon, zeitbis);
 
 		/*
 		 * Hier müsst ihr die Lehrerliste durchsuchen Methode suche(tmpname) gibt es
@@ -29,13 +34,14 @@ public class Main {
 
 	}
 
-	private static void eingabeLuL(String tmpnname, String tmpvname, String tmpkrzl, String tmppersnr, String tmpplz,
+	public static void eingabeLuL(String tmpnname, String tmpvname, String tmpkrzl, String tmppersnr, String tmpplz,
 			String tmpstrasse, String tmptelnr, String tmpmail) {
 
 		Lehrer templehrer = new Lehrer(tmpnname, tmpvname, tmpkrzl, tmppersnr, tmpplz, tmpstrasse, tmptelnr, tmpmail);
 
 		Lehrerlist.add(templehrer);
 		
+		speichern();
 		/*
 		 * Die Varialen müssten noch an den Kontruktor in der Lehrerklasse angepasst werden.
 		 * 
@@ -61,23 +67,42 @@ public class Main {
 		}
 	}
 
-	protected void speichern() {
-
-		/*
-		 * Hier den Speicherquellcode für die Serialisierung hinzufügen Speichern 
-		 * Outputstream
-		 * 
-		 * Bitte die Fehlzeitengruppe!
-		 */
+	public static void laden(){
+		try
+        {
+            FileInputStream fis = new FileInputStream("lehrerdaten");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+ 
+            Lehrerlist = (ArrayList) ois.readObject();
+ 
+            ois.close();
+            fis.close();
+        } 
+        catch (IOException ioe) 
+        {
+            ioe.printStackTrace();
+            return;
+        } 
+        catch (ClassNotFoundException c) 
+        {
+            System.out.println("Klasse nicht gefunden");
+            c.printStackTrace();
+            return;
+        }
 	}
 
-	protected void laden() {
-		/*
-		 * Hier den Speicherquellcode für die Serialisierung hinzufügen
-		 * Inputstream
-		 * 
-		 * Bitte die Fehlzeitengruppe!
-		 */
-
-	}
+    public static void speichern(){
+    	 try
+         {
+             FileOutputStream fos = new FileOutputStream("lehrerdaten");
+             ObjectOutputStream oos = new ObjectOutputStream(fos);
+             oos.writeObject(Lehrerlist);
+             oos.close();
+             fos.close();
+         } 
+         catch (IOException ioe) 
+         {
+             ioe.printStackTrace();
+         }
+    }
 }
