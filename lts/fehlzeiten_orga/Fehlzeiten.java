@@ -2,6 +2,8 @@ package fehlzeiten_orga;
 
 import java.util.Date;
 
+import fehlzeiten_orga.main;
+
 public class Fehlzeiten {
 
 	private Date fehltagevon;

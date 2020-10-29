@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class main {
 
-	static List<Lehrer> Lehrerlist = new ArrayList<Lehrer>();
+	public static List<Lehrer> Lehrerlist = new ArrayList<Lehrer>();
 
 	public static void main(String args[]) {
 
