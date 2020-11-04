@@ -311,6 +311,16 @@ public class GUI extends JFrame {
 		btnladen.setBounds(410, 329, 200, 50);
 		panelfz.add(btnladen);
 		
+		JButton btnPinnie = new JButton("Pinnie");
+		btnPinnie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("soos");
+			}
+		});
+		btnPinnie.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnPinnie.setBounds(636, 211, 200, 50);
+		panelfz.add(btnPinnie);
+		
 
 		
 
@@ -352,7 +362,6 @@ public class GUI extends JFrame {
 		
 		
 	}
-
 	}
 
 
