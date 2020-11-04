@@ -17,7 +17,7 @@ public class Main {
 
 	}
 
-	public void fzspeichern(String name, String grund, Date datumvon, Date datumbis, int zeitvon, int zeitbis) {
+	public void fzspeichern(String nname, String fehlgrund, Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis) {
 		//Lehrer lehrertemp1 = new Lehrer(name, grund, datumvon, datumbis, zeitvon, zeitbis);
 
 		/*
@@ -42,7 +42,7 @@ public class Main {
 		
 		speichern();
 		/*
-		 * Die Varialen müssten noch an den Kontruktor in der Lehrerklasse angepasst werden.
+		 * Die Variablen müssten noch an den Kontruktor in der Lehrerklasse angepasst werden.
 		 * 
 		 */
 
@@ -50,11 +50,12 @@ public class Main {
 
 	protected Lehrer suche(String tmpname) {
 
-		/*
-		 * Lehrer tmpLehrer = null; for(int i = 0; i > Lehrerlist.size();i++){
-		 * if(Lerhrerlist.get(i).getName.equals(tmpname)) { tmpLehrer =
-		 * Lehrerlist.get(i); } } return tmpLehrer;
-		 */
+		
+		  Lehrer tmpLehrer = null; 
+		  for(int i = 0; i > Lehrerlist.size();i++){
+		  if(Lerhrerlist.get(i).getName.equals(tmpname)) { tmpLehrer =
+		  Lehrerlist.get(i); } } return tmpLehrer;
+		 
 
 		return null;
 	}
