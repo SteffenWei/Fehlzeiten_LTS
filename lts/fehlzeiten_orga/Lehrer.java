@@ -7,6 +7,10 @@ import java.util.Date;
 
 public class Lehrer implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nname;
 	private String vname;
 	private String krzl;
@@ -29,7 +33,7 @@ public class Lehrer implements Serializable{
 		this.strasse = strasse;
 		this.telnr = telnr;
 		this.mail = mail;
-		this.flist = null;
+		this.setFlist(null);
 
 	}
 
@@ -127,6 +131,14 @@ public class Lehrer implements Serializable{
 		System.out.println(llist.get(0).toString());
 		System.out.println(llist.get(0).getNname());
 
+	}
+
+	public List<Fehlzeiten> getFlist() {
+		return flist;
+	}
+
+	public void setFlist(List<Fehlzeiten> flist) {
+		this.flist = flist;
 	}
 }
 /*
