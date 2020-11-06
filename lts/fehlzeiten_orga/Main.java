@@ -49,15 +49,15 @@ public class Main {
 	}
 
 	protected Lehrer suche(String tmpname) {
-
+		
 		
 		  Lehrer tmpLehrer = null; 
 		  for(int i = 0; i > Lehrerlist.size();i++){
-		  if(Lerhrerlist.get(i).getName.equals(tmpname)) { tmpLehrer =
+		  if(Lehrerlist.get(i).getNname().equals(tmpname)) { tmpLehrer =
 		  Lehrerlist.get(i); } } return tmpLehrer;
 		 
 
-		return null;
+		
 	}
 
 	private static void ausgabe() {
