@@ -17,21 +17,12 @@ public class Main {
 
 	}
 
-	public void fzspeichern(String name, String grund, Date datumvon, Date datumbis, int zeitvon, int zeitbis) {
-		//Lehrer lehrertemp1 = new Lehrer(name, grund, datumvon, datumbis, zeitvon, zeitbis);
-
-		/*
-		 * Hier müsst ihr die Lehrerliste durchsuchen Methode suche(tmpname) gibt es
-		 * bereits dann auf das gefundene Lehrerobjekt die
-		 * 
-		 */
-
+	public void fzspeichern(String nname, String fehlgrund, Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String grundsonstige) {
+		
+	Lehrer tmplehrer = suche(nname);
+	tmplehrer.addFehlzeiten(fehltagevon, fehltagebis, fehlstundenvon, fehlstundenbis, fehlgrund, grundsonstige);
 	}
 
-	public static String ksuche() {
-		return null;
-
-	}
 
 	public static void eingabeLuL(String tmpnname, String tmpvname, String tmpkrzl, String tmppersnr, String tmpplz,
 			String tmpstrasse, String tmptelnr, String tmpmail) {
@@ -41,22 +32,35 @@ public class Main {
 		Lehrerlist.add(templehrer);
 		
 		speichern();
-		/*
-		 * Die Varialen müssten noch an den Kontruktor in der Lehrerklasse angepasst werden.
-		 * 
-		 */
+		
 
 	}
+	
+	 protected Lehrer search(Lehrer tmpkrzl) {
+			
+			Lehrer tmpkrzl1 = null; 
+			  for(int i = 0; i > Lehrerlist.size();i++){
+			  if(Lehrerlist.get(i).getName.equals(tmpkrzl)) { tmpkrzl =
+			  Lehrerlist.get(i); } } return tmpkrzl;
+					 
+		
+
+		}
+	
+	
+	
+	
 
 	protected Lehrer suche(String tmpname) {
+		
+		
+		  Lehrer tmpLehrer = null; 
+		  for(int i = 0; i > Lehrerlist.size();i++){
+		  if(Lehrerlist.get(i).getNname().equals(tmpname)) { tmpLehrer =
+		  Lehrerlist.get(i); } } return tmpLehrer;
+		 
 
-		/*
-		 * Lehrer tmpLehrer = null; for(int i = 0; i > Lehrerlist.size();i++){
-		 * if(Lerhrerlist.get(i).getName.equals(tmpname)) { tmpLehrer =
-		 * Lehrerlist.get(i); } } return tmpLehrer;
-		 */
-
-		return null;
+		
 	}
 
 	private static void ausgabe() {

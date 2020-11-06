@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Lehrer implements Serializable{
 
+	public static final String getName = null;
 	/**
 	 * 
 	 */
