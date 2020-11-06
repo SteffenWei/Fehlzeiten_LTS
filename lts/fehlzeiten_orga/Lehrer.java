@@ -47,7 +47,8 @@ public class Lehrer implements Serializable{
 
 	public void addFehlzeiten(Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis,
 			String fehlgrund, String grundsonstige) {
-		// Vorlage
+	Fehlzeiten fehlzeit = new Fehlzeiten(fehltagevon, fehltagebis, fehlstundenvon, fehlstundenbis, fehlgrund, grundsonstige);
+		flist.add(fehlzeit);
 	}
 
 	public String getNname() {
@@ -140,7 +141,20 @@ public class Lehrer implements Serializable{
 	public void setFlist(List<Fehlzeiten> flist) {
 		this.flist = flist;
 	}
+	protected Fehlzeiten suche(String fehltagevon) {
+
+		
+		 Fehlzeiten fehlzeit = null; 
+		 for(int i = 0; i > flist.size();i++){
+			 
+			 if(flist.get(i).getFehltagevon().equals(fehltagevon)) { 
+				 fehlzeit = flist.get(i); 
+				 }
+			 } 
+		 
+		 return fehlzeit;
+
+	}
+	
 }
-/*
- * https://github.com/SteffenWei/Fehlzeiten_LTS
- */
+
