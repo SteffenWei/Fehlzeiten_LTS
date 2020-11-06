@@ -36,16 +36,14 @@ public class Main {
 
 	}
 	
-	 protected Lehrer search(String tmpkrzl) {
+	 protected Lehrer search(Lehrer tmpkrzl) {
 			
 			Lehrer tmpkrzl1 = null; 
 			  for(int i = 0; i > Lehrerlist.size();i++){
-			  if(Lehrerlist.get(i).getName.equals(tmpkrzl)) { tmpLehrer =
-			  Lehrerlist.get(i); } } return tmpLehrer;
-			
-			
-			
-			return null;
+			  if(Lehrerlist.get(i).getName.equals(tmpkrzl)) { tmpkrzl =
+			  Lehrerlist.get(i); } } return tmpkrzl;
+					 
+		
 
 		}
 	
