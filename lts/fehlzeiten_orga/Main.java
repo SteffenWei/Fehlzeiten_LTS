@@ -17,15 +17,10 @@ public class Main {
 
 	}
 
-	public void fzspeichern(String nname, String fehlgrund, Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis) {
-		//Lehrer lehrertemp1 = new Lehrer(name, grund, datumvon, datumbis, zeitvon, zeitbis);
-
-		/*
-		 * Hier müsst ihr die Lehrerliste durchsuchen Methode suche(tmpname) gibt es
-		 * bereits dann auf das gefundene Lehrerobjekt die
-		 * 
-		 */
-
+	public void fzspeichern(String nname, String fehlgrund, Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String grundsonstige) {
+		
+	Lehrer tmplehrer = suche(nname);
+	tmplehrer.addFehlzeiten(fehltagevon, fehltagebis, fehlstundenvon, fehlstundenbis, fehlgrund, grundsonstige);
 	}
 
 	public static String ksuche() {
@@ -41,10 +36,7 @@ public class Main {
 		Lehrerlist.add(templehrer);
 		
 		speichern();
-		/*
-		 * Die Variablen müssten noch an den Kontruktor in der Lehrerklasse angepasst werden.
-		 * 
-		 */
+		
 
 	}
 
