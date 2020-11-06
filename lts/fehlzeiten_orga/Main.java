@@ -23,10 +23,6 @@ public class Main {
 	tmplehrer.addFehlzeiten(fehltagevon, fehltagebis, fehlstundenvon, fehlstundenbis, fehlgrund, grundsonstige);
 	}
 
-	public static String ksuche() {
-		return null;
-
-	}
 
 	public static void eingabeLuL(String tmpnname, String tmpvname, String tmpkrzl, String tmppersnr, String tmpplz,
 			String tmpstrasse, String tmptelnr, String tmpmail) {
@@ -39,6 +35,23 @@ public class Main {
 		
 
 	}
+	
+	 protected Lehrer search(String tmpkrzl) {
+			
+			Lehrer tmpkrzl1 = null; 
+			  for(int i = 0; i > Lehrerlist.size();i++){
+			  if(Lehrerlist.get(i).getName.equals(tmpkrzl)) { tmpLehrer =
+			  Lehrerlist.get(i); } } return tmpLehrer;
+			
+			
+			
+			return null;
+
+		}
+	
+	
+	
+	
 
 	protected Lehrer suche(String tmpname) {
 		
