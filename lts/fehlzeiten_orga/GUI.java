@@ -206,7 +206,7 @@ public class GUI extends JFrame {
 		panellul.add(btnNeuenLehrerAnlegen);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		tabbedPane.addTab("New tab", null, scrollPane, null);
+		tabbedPane.addTab("Fehlzeitenliste", null, scrollPane, null);
 		
 		table_1 = new JTable(tableModel);
 		scrollPane.setViewportView(table_1);
