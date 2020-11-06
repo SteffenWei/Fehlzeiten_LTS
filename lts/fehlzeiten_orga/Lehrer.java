@@ -37,14 +37,6 @@ public class Lehrer implements Serializable{
 
 	}
 
-	/*
-	 * Ihr müsstet noch eine Methode einbauen, mit der man Fehlzeiten hinzufügen
-	 * kann. Diese ruft den Konstruktor Fehlzeiten public Fehlzeiten(Date
-	 * fehltagevon,Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String
-	 * fehlgrund, String grundsonstige) aus der Klasse Fehlzeiten auf. Die Variablen
-	 * müssen in den Methodenaufruf und werden beim Aufruf mitgegeben.
-	 */
-
 	public void addFehlzeiten(Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis,
 			String fehlgrund, String grundsonstige) {
 	Fehlzeiten fehlzeit = new Fehlzeiten(fehltagevon, fehltagebis, fehlstundenvon, fehlstundenbis, fehlgrund, grundsonstige);
