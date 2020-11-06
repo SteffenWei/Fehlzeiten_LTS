@@ -39,7 +39,9 @@ import javax.swing.JScrollPane;
 
 public class GUI extends JFrame {
 	public String col[] = {"Name","Tag","Grund", "Personalnr", "Zeit", "test"};
+	public String col2[] = {"Vorname", "Nachname", "Kürzel", "Personalnr", "PLZ", "Straße", "TelNr.", "Mail"};
 	public DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+	public DefaultTableModel tableModel2 = new DefaultTableModel(col2, 0);
 	public String[] grundarray = {"Krankheit", "Durchfall", "keine Lust", "Simon"};
 	public JComboBox persontxt = new JComboBox();
 	public Object[] arraypers;
@@ -52,6 +54,7 @@ public class GUI extends JFrame {
 	private JTable table;
 	private JTextField textField;
 	private JTable table_1;
+	private JTable table_2;
 	private JTextField vnametxt;
 	private JTextField nnametxt;
 	private JTextField strassetxt;
@@ -205,11 +208,17 @@ public class GUI extends JFrame {
 		btnNeuenLehrerAnlegen.setBounds(24, 416, 285, 50);
 		panellul.add(btnNeuenLehrerAnlegen);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		tabbedPane.addTab("Fehlzeitenliste", null, scrollPane, null);
+		JScrollPane scrollPanefzl = new JScrollPane();
+		tabbedPane.addTab("Fehlzeitenliste", null, scrollPanefzl, null);
 		
 		table_1 = new JTable(tableModel);
-		scrollPane.setViewportView(table_1);
+		scrollPanefzl.setViewportView(table_1);
+		
+		JScrollPane scrollPanelull = new JScrollPane();
+		tabbedPane.addTab("Lehrerliste", null, scrollPanelull, null);
+		
+		table_2 = new JTable(tableModel2);
+		scrollPanelull.setViewportView(table_2);
 
 		
 		
@@ -310,22 +319,7 @@ public class GUI extends JFrame {
 		btnladen.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnladen.setBounds(410, 329, 200, 50);
 		panelfz.add(btnladen);
-		
-		JButton btnPinnie = new JButton("Pinnie");
-		btnPinnie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("soos");
-			}
-		});
-		btnPinnie.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnPinnie.setBounds(636, 211, 200, 50);
-		panelfz.add(btnPinnie);
-		
 
-		
-
-		
-		
 		
 //setupzeugs und so
 		
@@ -336,8 +330,11 @@ public class GUI extends JFrame {
 				Lehrer ltemp1 = Main.Lehrerlist.get(i);
 	            String nametemp = ltemp1.getNname();
 	            Object[] tbltemp1 = {nametemp, "01.01.2020", "Simon", 1,20,5};
+	            Object[] tbltemp2 = {ltemp1.getVname(), ltemp1.getNname(), ltemp1.getKrzl(), ltemp1.getPersnr(), 
+	            		ltemp1.getPlz(), ltemp1.getStrasse(), ltemp1.getTelnr(), ltemp1.getMail()};
 	            
 	            tableModel.addRow(tbltemp1);
+	            tableModel2.addRow(tbltemp2);
 			}
 	        
 			System.out.println("Setup fertig!");
