@@ -14,13 +14,17 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import java.awt.Font;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JLabel;
+
+
 
 
 
@@ -307,7 +311,21 @@ public class GUI extends JFrame {
 				
 				String selectedGrund = (String) grundtxt.getSelectedItem();
 				String selectedLehrer = (String) persontxt.getSelectedItem();
-				Main.fzspeichern(selectedLehrer, selectedGrund, SimpleDateFormat("dd/MM/yyyy").parse(datumvontxt.getText()), format.parse(datumvontxt.getText()), Integer.parseInt(stundevontxt.getText()), Integer.parseInt(stundebistxt.getText()), "simon");
+				Date date1 = null;
+				try {
+					date1 = new SimpleDateFormat("dd/MM/yyyy").parse(datumvontxt.getText());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Date date2 = null;
+				try {
+					date2 = new SimpleDateFormat("dd/MM/yyyy").parse(datumbistxt.getText());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Main.fzspeichern(selectedLehrer, selectedGrund, date1, date2, Integer.parseInt(stundevontxt.getText()), Integer.parseInt(stundebistxt.getText()), "simon");
 			}
 		});
 		btnFehlzeitSpeichern.setFont(new Font("Tahoma", Font.PLAIN, 22));
