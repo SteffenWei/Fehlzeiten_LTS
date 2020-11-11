@@ -17,7 +17,7 @@ public class Main {
 
 	}
 
-	public void fzspeichern(String nname, String fehlgrund, Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String grundsonstige) {
+	public static void fzspeichern(String nname, String fehlgrund, Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String grundsonstige) {
 		
 	Lehrer tmplehrer = suche(nname);
 	tmplehrer.addFehlzeiten(fehltagevon, fehltagebis, fehlstundenvon, fehlstundenbis, fehlgrund, grundsonstige);
@@ -51,7 +51,7 @@ public class Main {
 	
 	
 
-	protected Lehrer suche(String tmpname) {
+	protected static Lehrer suche(String tmpname) {
 		
 		
 		  Lehrer tmpLehrer = null; 

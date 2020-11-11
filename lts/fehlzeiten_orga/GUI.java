@@ -14,11 +14,16 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import java.awt.Font;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JLabel;
+
+
+
 
 
 import java.awt.event.ActionListener;
@@ -44,6 +49,7 @@ public class GUI extends JFrame {
 	public DefaultTableModel tableModel2 = new DefaultTableModel(col2, 0);
 	public String[] grundarray = {"Krankheit", "Durchfall", "keine Lust", "Simon"};
 	public JComboBox persontxt = new JComboBox();
+	JComboBox grundtxt = new JComboBox(grundarray);
 	public Object[] arraypers;
 	public List<String> personri = new ArrayList<String>();
 	private JPanel contentPane;
@@ -222,7 +228,7 @@ public class GUI extends JFrame {
 
 		
 		
-		JComboBox grundtxt = new JComboBox(grundarray);
+		
 		grundtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		grundtxt.setBounds(163, 93, 200, 59);
 		panelfz.add(grundtxt);
@@ -294,31 +300,19 @@ public class GUI extends JFrame {
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		label_1.setBounds(10, 441, 131, 50);
 		panelfz.add(label_1);
-
 		
-//buttons
-		
-		JButton btnrefresh = new JButton("aktualisieren");
-		btnrefresh.addActionListener(new ActionListener() {
+		JButton btnFehlzeitSpeichern = new JButton("Fehlzeit speichern");
+		btnFehlzeitSpeichern.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-	
-				setup();
+				
+				String selectedGrund = (String) grundtxt.getSelectedItem();
+				String selectedLehrer = (String) persontxt.getSelectedItem();
+				Main.fzspeichern(selectedLehrer, selectedGrund, SimpleDateFormat("dd/MM/yyyy").parse(datumvontxt.getText()), format.parse(datumvontxt.getText()), Integer.parseInt(stundevontxt.getText()), Integer.parseInt(stundebistxt.getText()), "simon");
 			}
 		});
-		btnrefresh.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnrefresh.setBounds(400, 27, 200, 50);
-		panelfz.add(btnrefresh);
-		
-		JButton btnladen = new JButton("laden");
-		btnladen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//laden();
-				Main.laden();
-			}
-		});
-		btnladen.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnladen.setBounds(410, 329, 200, 50);
-		panelfz.add(btnladen);
+		btnFehlzeitSpeichern.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnFehlzeitSpeichern.setBounds(422, 441, 285, 50);
+		panelfz.add(btnFehlzeitSpeichern);
 
 		
 //setupzeugs und so
