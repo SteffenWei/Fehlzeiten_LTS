@@ -33,8 +33,49 @@ public class Main {
 		
 		speichern();
 		
-
+}
+	
+	
+protected void removeLehrer (String tmpname){
+		
+		Lehrer tmpLehrer = null; 
+		  for(int i = 0; i > Lehrerlist.size();i++){
+		  if(Lehrerlist.get(i).getNname().equals(tmpname)) { tmpLehrer =
+		  Lehrerlist.remove(i); } } 
+	
 	}
+	 protected void editLehrernname(String tmpname, String nname){
+		 Lehrer edit= suche (tmpname);
+		 edit.setNname(nname);
+	 }
+	 protected void editLehrervname(String tmpname, String vname){
+		 Lehrer edit= suche (tmpname);
+		 edit.setVname(vname);
+	 }
+	 protected void editLehrerkrzl(String tmpname, String krzl){
+		 Lehrer edit= suche (tmpname);
+		 edit.setKrzl(krzl);
+	 }
+	 protected void editLehrerpersnr(String tmpname, String persnr){
+		 Lehrer edit= suche (tmpname);
+		 edit.setPersnr(persnr);
+	 }
+	 protected void editLehrerplz(String tmpname, String plz){
+		 Lehrer edit= suche (tmpname);
+		 edit.setPlz(plz);
+	 }
+	 protected void editLehrerstrasse(String tmpname, String strasse){
+		 Lehrer edit= suche (tmpname);
+		 edit.setStrasse(strasse);
+	 }
+	 protected void editLehrertelnr(String tmpname, String telnr){
+		 Lehrer edit= suche (tmpname);
+		 edit.setTelnr(telnr);
+	 }
+	 protected void editLehrermail(String tmpname, String mail){
+		 Lehrer edit= suche (tmpname);
+		 edit.setNname(mail);
+	 }
 	
 	 protected Lehrer search(Lehrer tmpkrzl) {
 			
@@ -46,6 +87,7 @@ public class Main {
 		
 
 		}
+	 
 	
 	
 	
