@@ -13,9 +13,9 @@ public class Main {
 
 	public static List<Lehrer> Lehrerlist = new ArrayList<Lehrer>();
 
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 
-	}
+	}*/
 
 	public static void fzspeichern(String nname, String fehlgrund, Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String grundsonstige) {
 		
