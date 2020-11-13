@@ -117,15 +117,7 @@ public class Lehrer implements Serializable{
 	static List<Lehrer> llist = new ArrayList<Lehrer>();
 
 	//
-	public static void main(String[] args) {
-
-		Lehrer l0 = new Lehrer("Pinther", "Hubertus", "PINT", "69", "66666, Hades", "Felder von Asphodel 66",
-				"66666/666420", "h.pinther@lahntalschule.de");
-		llist.add(l0);
-		System.out.println(llist.get(0).toString());
-		System.out.println(llist.get(0).getNname());
-
-	}
+	public static void main(String[] args) {}
 
 	public List<Fehlzeiten> getFlist() {
 		return flist;
@@ -134,20 +126,81 @@ public class Lehrer implements Serializable{
 	public void setFlist(List<Fehlzeiten> flist) {
 		this.flist = flist;
 	}
-	protected Fehlzeiten suche(String fehltagevon) {
-
-		
-		 Fehlzeiten fehlzeit = null; 
-		 for(int i = 0; i > flist.size();i++){
-			 
-			 if(flist.get(i).getFehltagevon().equals(fehltagevon)) { 
-				 fehlzeit = flist.get(i); 
-				 }
-			 } 
-		 
-		 return fehlzeit;
-
-	}
 	
+	protected Fehlzeiten suchef(String fehltagevon) {
+	Fehlzeiten fehlzeit = null; 
+	for(int i = 0; i > flist.size();i++){
+			 
+	if(flist.get(i).getFehltagevon().equals(fehltagevon)) { 
+	fehlzeit = flist.get(i);  }} 
+	return fehlzeit;}
+	
+/*	
+	protected Lehrer search(Lehrer tmpkrzl) {
+			
+	Lehrer tmpkrzl1 = null; 
+		for(int i = 0; i > llist.size();i++){
+			if(llist.get(i).getKrzl().equals(tmpkrzl)) { tmpkrzl =
+			llist.get(i); } } return tmpkrzl;}
+	 
+*/
+	protected void removeLehrer (String tmpKrzl){
+		
+		llist = Main.Lehrerlist;
+		Lehrer tmpLehrer =  null;
+		for(int i = 0; i < llist.size();i++){
+		  if(llist.get(i).getKrzl().equals(tmpKrzl)) { tmpLehrer =
+		  llist.remove(i); }}}
+	
+//
+	protected static Lehrer suche(String tmpname) {
+		
+		llist = Main.Lehrerlist;
+
+		  Lehrer tmpLehrer = null; 
+		  for(int i = 0; i < llist.size();i++){
+		  if(llist.get(i).getNname().equals(tmpname)) { tmpLehrer =
+		  llist.get(i); } } return tmpLehrer;
+		 
+	}
+	//	
+	protected void editLehrernname(String tmpname, String nname){
+		 Lehrer edit= suche (tmpname);
+		 edit.setNname(nname);
+	 }
+	 protected void editLehrervname(String tmpname, String vname){
+		 Lehrer edit= suche (tmpname);
+		 edit.setVname(vname);
+	 }
+	 protected void editLehrerkrzl(String tmpname, String krzl){
+		 Lehrer edit= suche (tmpname);
+		 edit.setKrzl(krzl);
+	 }
+	 protected void editLehrerpersnr(String tmpname, String persnr){
+		 Lehrer edit= suche (tmpname);
+		 edit.setPersnr(persnr);
+	 }
+	 protected void editLehrerplz(String tmpname, String plz){
+		 Lehrer edit= suche (tmpname);
+		 edit.setPlz(plz);
+	 }
+	 protected void editLehrerstrasse(String tmpname, String strasse){
+		 Lehrer edit= suche (tmpname);
+		 edit.setStrasse(strasse);
+	 }
+	 protected void editLehrertelnr(String tmpname, String telnr){
+		 Lehrer edit= suche (tmpname);
+		 edit.setTelnr(telnr);
+	 }
+	 protected void editLehrermail(String tmpname, String mail){
+		 Lehrer edit= suche (tmpname);
+		 edit.setNname(mail);
+	 }
+
+
+
+
 }
+
+
 
