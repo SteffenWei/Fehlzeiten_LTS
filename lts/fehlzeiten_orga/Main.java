@@ -23,7 +23,9 @@ public class Main {
 	tmplehrer.addFehlzeiten(fehltagevon, fehltagebis, fehlstundenvon, fehlstundenbis, fehlgrund, grundsonstige);
 	}
 
-
+/*  Benennung der Strings  */
+	
+	
 	public static void eingabeLuL(String tmpnname, String tmpvname, String tmpkrzl, String tmppersnr, String tmpplz,
 			String tmpstrasse, String tmptelnr, String tmpmail) {
 
@@ -35,11 +37,14 @@ public class Main {
 		
 }
 	
+/* Löschen und Änderungen von Lehrerdaten  */	
+	
+	
 	
 protected void removeLehrer (String tmpname){
 		
 		Lehrer tmpLehrer = null; 
-		  for(int i = 0; i > Lehrerlist.size();i++){
+		  for(int i = 0; i < Lehrerlist.size();i++){
 		  if(Lehrerlist.get(i).getNname().equals(tmpname)) { tmpLehrer =
 		  Lehrerlist.remove(i); } } 
 	
@@ -80,9 +85,9 @@ protected void removeLehrer (String tmpname){
 	 protected Lehrer search(Lehrer tmpkrzl) {
 			
 			Lehrer tmpkrzl1 = null; 
-			  for(int i = 0; i > Lehrerlist.size();i++){
+			  for(int i = 0; i < Lehrerlist.size();i++){
 			  if(Lehrerlist.get(i).getName.equals(tmpkrzl)) { tmpkrzl =
-			  Lehrerlist.get(i); } } return tmpkrzl;
+			  Lehrerlist.get(i); } } return tmpkrzl1;
 					 
 		
 
@@ -90,20 +95,27 @@ protected void removeLehrer (String tmpname){
 	 
 	
 	
-	
+	/*  Suche der Lehrerkürzel  */
+	 
+	 
 	
 
 	protected static Lehrer suche(String tmpname) {
 		
 		
 		  Lehrer tmpLehrer = null; 
-		  for(int i = 0; i > Lehrerlist.size();i++){
+		  for(int i = 0; i < Lehrerlist.size();i++){
 		  if(Lehrerlist.get(i).getNname().equals(tmpname)) { tmpLehrer =
 		  Lehrerlist.get(i); } } return tmpLehrer;
 		 
-
-		
 	}
+	
+	
+	
+		/*  Suche der Lehrernamen  */
+		  
+		  
+	
 
 	private static void ausgabe() {
 		for (int i = 0; i < Lehrerlist.size(); i++) {
@@ -111,7 +123,12 @@ protected void removeLehrer (String tmpname){
 			System.out.println(Lehrerlist.get(i).toString());
 		}
 	}
+	
 
+	/*  Ausgabe der Daten  */
+	
+	
+	
 	public static void laden(){
 		try
         {
@@ -150,4 +167,8 @@ protected void removeLehrer (String tmpname){
              ioe.printStackTrace();
          }
     }
+    
 }
+    
+    /* Speicherung der Daten */
+
