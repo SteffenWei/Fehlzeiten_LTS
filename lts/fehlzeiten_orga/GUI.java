@@ -23,12 +23,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JLabel;
-
-
-
-
-
-
+import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -43,6 +38,7 @@ import java.io.ObjectOutputStream;
 import javax.swing.JTable;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 
 
 
@@ -53,9 +49,11 @@ public class GUI extends JFrame {
 	public DefaultTableModel tableModel2 = new DefaultTableModel(col2, 0);
 	public String[] grundarray = {"Krankheit", "Durchfall", "keine Lust", "Simon"};
 	public JComboBox persontxt = new JComboBox();
-	JComboBox grundtxt = new JComboBox(grundarray);
+	public JComboBox krzlctxt = new JComboBox();
+	public JComboBox grundtxt = new JComboBox(grundarray);
 	public Object[] arraypers;
 	public List<String> personri = new ArrayList<String>();
+	public List<String> krzlri = new ArrayList<String>();
 	private JPanel contentPane;
 	private JTextField datumvontxt;
 	private JTextField datumbistxt;
@@ -106,7 +104,7 @@ public class GUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 864, 539);
+		tabbedPane.setBounds(10, 22, 864, 539);
 		contentPane.add(tabbedPane);
 		
 		JPanel panelfz = new JPanel();
@@ -218,6 +216,16 @@ public class GUI extends JFrame {
 		btnNeuenLehrerAnlegen.setBounds(24, 416, 285, 50);
 		panellul.add(btnNeuenLehrerAnlegen);
 		
+		JButton btnRefresh = new JButton("aktualisieren");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			  setup();
+			}
+		});
+		btnRefresh.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		btnRefresh.setBounds(572, 0, 150, 35);
+		contentPane.add(btnRefresh);
+		
 		JScrollPane scrollPanefzl = new JScrollPane();
 		tabbedPane.addTab("Fehlzeitenliste", null, scrollPanefzl, null);
 		
@@ -236,6 +244,7 @@ public class GUI extends JFrame {
 		grundtxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		grundtxt.setBounds(163, 93, 200, 59);
 		panelfz.add(grundtxt);
+
 		
 		datumvontxt = new JTextField();
 		datumvontxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -264,6 +273,10 @@ public class GUI extends JFrame {
 		persontxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		persontxt.setBounds(163, 23, 200, 59);
 		panelfz.add(persontxt);
+		
+		krzlctxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		krzlctxt.setBounds(390, 23, 200, 59);
+		panelfz.add(krzlctxt);
 		
 		JLabel lblLehrerinn = new JLabel("LehrerInn:");
 		lblLehrerinn.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -313,16 +326,15 @@ public class GUI extends JFrame {
 				String selectedLehrer = (String) persontxt.getSelectedItem();
 				Date date1 = null;
 				try {
-					date1 = new SimpleDateFormat("dd/MM/yyyy").parse(datumvontxt.getText());
+					date1 = new SimpleDateFormat("dd.MM.yyyy").parse(datumvontxt.getText());
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Datum bitte im Format tt.mm.yyyy eingeben");
 					e.printStackTrace();
 				}
 				Date date2 = null;
 				try {
-					date2 = new SimpleDateFormat("dd/MM/yyyy").parse(datumbistxt.getText());
+					date2 = new SimpleDateFormat("dd.MM.yyyy").parse(datumbistxt.getText());
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				Main.fzspeichern(selectedLehrer, selectedGrund, date1, date2, Integer.parseInt(stundevontxt.getText()), Integer.parseInt(stundebistxt.getText()), "simon");
@@ -338,37 +350,66 @@ public class GUI extends JFrame {
 		    Main.laden();
 			setup();
 			
-			for(int i = 0; i<Main.Lehrerlist.size();i++){
-				Lehrer ltemp1 = Main.Lehrerlist.get(i);
-	            String nametemp = ltemp1.getNname();
-	            Object[] tbltemp1 = {nametemp, "01.01.2020", "Simon", 1,20,5};
-	            Object[] tbltemp2 = {ltemp1.getVname(), ltemp1.getNname(), ltemp1.getKrzl(), ltemp1.getPersnr(), 
-	            		ltemp1.getPlz(), ltemp1.getStrasse(), ltemp1.getTelnr(), ltemp1.getMail()};
-	            
-	            tableModel.addRow(tbltemp1);
-	            tableModel2.addRow(tbltemp2);
-			}
+
+			
 	        
 			System.out.println("Setup fertig!");
 			
 	}
 	
 	
+	public void tablesetup() {
+		
+		 while(tableModel.getRowCount() > 0) {
+			  tableModel.removeRow(0);
+			}
+		 
+		 while(tableModel2.getRowCount() > 0) {
+			  tableModel2.removeRow(0);
+			}
+		
+		for(int i = 0; i<Main.Lehrerlist.size();i++){
+			Lehrer ltemp1 = Main.Lehrerlist.get(i);
+            String nametemp = ltemp1.getNname();
+            
+               for(int o = 1; o<ltemp1.getFlist().size();o++) {
+            	   Fehlzeiten flztemp1 = ltemp1.getFlist().get(o);
+            	   Object[] tbltemp1 = {nametemp, flztemp1.getFehltagevon(), flztemp1.getFehlgrund(), ltemp1.getPersnr(),flztemp1.getFehlstundenvon(), flztemp1.getFehlstundenbis()};
+            	   tableModel.addRow(tbltemp1);
+               }
+            
+            
+            Object[] tbltemp2 = {ltemp1.getVname(), ltemp1.getNname(), ltemp1.getKrzl(), ltemp1.getPersnr(), 
+            		ltemp1.getPlz(), ltemp1.getStrasse(), ltemp1.getTelnr(), ltemp1.getMail()};
+            
+            
+            tableModel2.addRow(tbltemp2);
+		}
+		
+	}
 	
 	public void setup(){
+		tablesetup();
+		
         System.out.println("aktualisiert personen:");
         
         while(personri.size() > 0) {
 			  personri.remove(0);
 			}
+        while(krzlri.size() > 0) {
+			  krzlri.remove(0);
+			}
 		for(int i = 0; i<Main.Lehrerlist.size();i++){
 			Lehrer ltemp1 = Main.Lehrerlist.get(i);
 			personri.add(ltemp1.getNname());
+			krzlri.add(ltemp1.getKrzl());
 		}
 		Object[] arraypers = personri.toArray();
+		Object[] arraykrzl = krzlri.toArray();
 		System.out.println( Arrays.toString(arraypers) );
+		System.out.println( Arrays.toString(arraykrzl) );
 		persontxt.setModel(new DefaultComboBoxModel(arraypers));
-		
+		krzlctxt.setModel(new DefaultComboBoxModel(arraykrzl));
 		
 	}
 	}

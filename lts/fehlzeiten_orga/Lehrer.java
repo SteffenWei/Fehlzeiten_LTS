@@ -2,6 +2,8 @@ package fehlzeiten_orga;
 
 import java.util.List;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -34,7 +36,27 @@ public class Lehrer implements Serializable{
 		this.strasse = strasse;
 		this.telnr = telnr;
 		this.mail = mail;
-		this.setFlist(null);
+		//this.setFlist(null);
+		this.flist = flist;
+		
+		Date date1 = null;
+		try {
+			date1 = new SimpleDateFormat("dd/MM/yyyy").parse("10/10/2020");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date date2 = null;
+		try {
+			date2 = new SimpleDateFormat("dd/MM/yyyy").parse("10/10/2020");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		Fehlzeiten flzdummy = new Fehlzeiten(date1,date2,1,1,"grunddummy","grunddummyalt");
+		flist.add(flzdummy);
 
 	}
 

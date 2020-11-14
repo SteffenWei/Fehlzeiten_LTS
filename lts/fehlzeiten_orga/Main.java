@@ -21,6 +21,8 @@ public class Main {
 		
 	Lehrer tmplehrer = suche(nname);
 	tmplehrer.addFehlzeiten(fehltagevon, fehltagebis, fehlstundenvon, fehlstundenbis, fehlgrund, grundsonstige);
+	
+	speichern();
 	}
 
 /*  Benennung der Strings  */
@@ -82,15 +84,13 @@ protected void removeLehrer (String tmpname){
 		 edit.setNname(mail);
 	 }
 	
-	 protected Lehrer search(Lehrer tmpkrzl) {
+	 protected Lehrer search(String tmpkrzl) {
 			
 			Lehrer tmpkrzl1 = null; 
 			  for(int i = 0; i < Lehrerlist.size();i++){
-			  if(Lehrerlist.get(i).getName.equals(tmpkrzl)) { tmpkrzl =
+			  if(Lehrerlist.get(i).getKrzl().equals(tmpkrzl)) { tmpkrzl1 =
 			  Lehrerlist.get(i); } } return tmpkrzl1;
-					 
-		
-
+	
 		}
 	 
 	
