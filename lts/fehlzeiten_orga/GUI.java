@@ -43,11 +43,11 @@ import javax.swing.JToolBar;
 
 
 public class GUI extends JFrame {
-	public String col[] = {"Name","Tag","Grund", "Personalnr", "Zeit", "test"};
+	public String col[] = {"Name","Tage","Grund", "Personalnr", "Stunden", "Kürzel"};
 	public String col2[] = {"Vorname", "Nachname", "Kürzel", "Personalnr", "PLZ", "Straße", "TelNr.", "Mail"};
 	public DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 	public DefaultTableModel tableModel2 = new DefaultTableModel(col2, 0);
-	public String[] grundarray = {"Krankheit", "Durchfall", "keine Lust", "Simon"};
+	public String[] grundarray = {"Krankheit", "Durchfall", "keine Lust", "Simon", "sonstige"};
 	public JComboBox persontxt = new JComboBox();
 	public JComboBox krzlctxt = new JComboBox();
 	public JComboBox grundtxt = new JComboBox(grundarray);
@@ -71,6 +71,7 @@ public class GUI extends JFrame {
 	private JTextField telnrtxt;
 	private JTextField persnrtxt;
 	private JTextField krzltxt;
+	private JTextField grundsonstigetxt;
 
 //Start des Programms
 	public static void main(String[] args) {
@@ -337,12 +338,18 @@ public class GUI extends JFrame {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				Main.fzspeichern(selectedLehrer, selectedGrund, date1, date2, Integer.parseInt(stundevontxt.getText()), Integer.parseInt(stundebistxt.getText()), "simon");
+				Main.fzspeichern(selectedLehrer, selectedGrund, date1, date2, Integer.parseInt(stundevontxt.getText()), Integer.parseInt(stundebistxt.getText()), grundsonstigetxt.getText());
 			}
 		});
 		btnFehlzeitSpeichern.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnFehlzeitSpeichern.setBounds(422, 441, 285, 50);
 		panelfz.add(btnFehlzeitSpeichern);
+		
+		grundsonstigetxt = new JTextField();
+		grundsonstigetxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		grundsonstigetxt.setColumns(10);
+		grundsonstigetxt.setBounds(390, 93, 200, 59);
+		panelfz.add(grundsonstigetxt);
 
 		
 //setupzeugs und so
@@ -360,6 +367,8 @@ public class GUI extends JFrame {
 	
 	public void tablesetup() {
 		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		
 		 while(tableModel.getRowCount() > 0) {
 			  tableModel.removeRow(0);
 			}
@@ -374,7 +383,17 @@ public class GUI extends JFrame {
             
                for(int o = 1; o<ltemp1.getFlist().size();o++) {
             	   Fehlzeiten flztemp1 = ltemp1.getFlist().get(o);
-            	   Object[] tbltemp1 = {nametemp, flztemp1.getFehltagevon(), flztemp1.getFehlgrund(), ltemp1.getPersnr(),flztemp1.getFehlstundenvon(), flztemp1.getFehlstundenbis()};
+            	   
+            	   String grundtemp;
+            	   if(flztemp1.getFehlgrund().contentEquals("sonstige")) {
+            		   grundtemp = flztemp1.getGrundsonstige();
+            	   }else {
+            		   grundtemp = flztemp1.getFehlgrund();
+            	   }
+            	   
+            	   Object[] tbltemp1 = {nametemp, simpleDateFormat.format(flztemp1.getFehltagevon()) + " bis " + simpleDateFormat.format(flztemp1.getFehltagebis()), 
+            			   grundtemp, ltemp1.getPersnr(),flztemp1.getFehlstundenvon() + " bis " + flztemp1.getFehlstundenbis(), ltemp1.getKrzl()};
+            	   
             	   tableModel.addRow(tbltemp1);
                }
             
