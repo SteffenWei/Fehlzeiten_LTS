@@ -168,7 +168,7 @@ public class Lehrer implements Serializable{
 */
 	protected void removeLehrer (String tmpKrzl){
 		
-		llist = Main.Lehrerlist;
+		llist = Main.lehrerList;
 		Lehrer tmpLehrer =  null;
 		for(int i = 0; i < llist.size();i++){
 		  if(llist.get(i).getKrzl().equals(tmpKrzl)) { tmpLehrer =
@@ -177,7 +177,7 @@ public class Lehrer implements Serializable{
 //
 	protected static Lehrer suche(String tmpname) {
 		
-		llist = Main.Lehrerlist;
+		llist = Main.lehrerList;
 
 		  Lehrer tmpLehrer = null; 
 		  for(int i = 0; i < llist.size();i++){

@@ -1,17 +1,28 @@
 package fehlzeiten_orga;
 
 import java.util.List;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Main {
 
-	public static List<Lehrer> Lehrerlist = new ArrayList<Lehrer>();
+	public static List<Lehrer> lehrerList = new ArrayList<Lehrer>();
 
 	public static void main(String args[]) {
 
@@ -33,7 +44,7 @@ public class Main {
 
 		Lehrer templehrer = new Lehrer(tmpnname, tmpvname, tmpkrzl, tmppersnr, tmpplz, tmpstrasse, tmptelnr, tmpmail);
 
-		Lehrerlist.add(templehrer);
+		lehrerList.add(templehrer);
 		
 		speichern();
 		
@@ -46,9 +57,9 @@ public class Main {
 protected void removeLehrer (String tmpname){
 		
 		Lehrer tmpLehrer = null; 
-		  for(int i = 0; i < Lehrerlist.size();i++){
-		  if(Lehrerlist.get(i).getNname().equals(tmpname)) { tmpLehrer =
-		  Lehrerlist.remove(i); } } 
+		  for(int i = 0; i < lehrerList.size();i++){
+		  if(lehrerList.get(i).getNname().equals(tmpname)) { tmpLehrer =
+		  lehrerList.remove(i); } } 
 	
 	}
 	 protected void editLehrernname(String tmpname, String nname){
@@ -87,9 +98,9 @@ protected void removeLehrer (String tmpname){
 	 protected Lehrer searchkrzl(String tmpkrzl) {
 			
 			Lehrer tmpkrzl1 = null; 
-			  for(int i = 0; i < Lehrerlist.size();i++){
-			  if(Lehrerlist.get(i).getKrzl().equals(tmpkrzl)) { tmpkrzl1 =
-			  Lehrerlist.get(i); } } return tmpkrzl1;
+			  for(int i = 0; i < lehrerList.size();i++){
+			  if(lehrerList.get(i).getKrzl().equals(tmpkrzl)) { tmpkrzl1 =
+			  lehrerList.get(i); } } return tmpkrzl1;
 	
 		}
 	 
@@ -104,9 +115,9 @@ protected void removeLehrer (String tmpname){
 		
 		
 		  Lehrer tmpLehrer = null; 
-		  for(int i = 0; i < Lehrerlist.size();i++){
-		  if(Lehrerlist.get(i).getNname().equals(tmpname)) { tmpLehrer =
-		  Lehrerlist.get(i); } } System.out.println(tmpLehrer.toString()); 
+		  for(int i = 0; i < lehrerList.size();i++){
+		  if(lehrerList.get(i).getNname().equals(tmpname)) { tmpLehrer =
+		  lehrerList.get(i); } } System.out.println(tmpLehrer.toString()); 
 		  return tmpLehrer;
 	
 	}
@@ -119,9 +130,9 @@ protected void removeLehrer (String tmpname){
 	
 
 	private static void ausgabe() {
-		for (int i = 0; i < Lehrerlist.size(); i++) {
+		for (int i = 0; i < lehrerList.size(); i++) {
 
-			System.out.println(Lehrerlist.get(i).toString());
+			System.out.println(lehrerList.get(i).toString());
 		}
 	}
 	
@@ -136,7 +147,7 @@ protected void removeLehrer (String tmpname){
             FileInputStream fis = new FileInputStream("lehrerdaten");
             ObjectInputStream ois = new ObjectInputStream(fis);
  
-            Lehrerlist = (ArrayList) ois.readObject();
+            lehrerList = (ArrayList) ois.readObject();
  
             ois.close();
             fis.close();
@@ -159,7 +170,7 @@ protected void removeLehrer (String tmpname){
          {
              FileOutputStream fos = new FileOutputStream("lehrerdaten");
              ObjectOutputStream oos = new ObjectOutputStream(fos);
-             oos.writeObject(Lehrerlist);
+             oos.writeObject(lehrerList);
              oos.close();
              fos.close();
          } 
@@ -168,6 +179,107 @@ protected void removeLehrer (String tmpname){
              ioe.printStackTrace();
          }
     }
+    
+    
+    //NEU
+    
+    protected static String auswahl() {
+		JFileChooser fc = new JFileChooser();
+	    fc.setFileFilter( new FileNameExtensionFilter("Textdateien", ".txt", "*.html", "*.log", "*.csv" ) );
+
+	    int state = fc.showOpenDialog( null );
+
+	    if ( state == JFileChooser.APPROVE_OPTION )
+	    {
+	      File file = fc.getSelectedFile();
+	      System.out.println( file.getName() );
+	      return file.getName();
+	    }
+	    else
+	      System.out.println( "Auswahl abgebrochen" );
+	      return "Abgebrochen";
+	  }
+    
+    
+    private List<Lehrer> loadLehrer(String adrLehr) {
+		List <Lehrer> tmpLehrerlist = new ArrayList<Lehrer>();
+    	Path pathToLehrer = Paths.get(adrLehr);
+		try (BufferedReader br = Files.newBufferedReader(pathToLehrer, StandardCharsets.ISO_8859_1))
+		{ 
+			String line = br.readLine(); 
+			
+			 
+			while (line != null) { 
+				
+				
+				String[] attributes = line.split(","); 
+				
+				Lehrer tmpLehrer = createLehrer(attributes); 
+								
+				tmpLehrerlist.add(tmpLehrer); 
+				
+				
+				
+				line = br.readLine(); 
+				} 
+			} catch (IOException ioe) { 
+				ioe.printStackTrace(); 
+				} 
+			return tmpLehrerlist;
+			}
+		
+	
+	private Lehrer createLehrer(String[] attributes) {
+		String tmpnname = attributes[0];
+		String tmpvname = attributes[1];
+		String tmpkrzl = attributes[2]; 
+		String tmppersnr = attributes[3];
+		String tmpplz = attributes[4]; 
+		String tmpstrasse = attributes[5]; 
+		String tmptelnr = attributes[6]; 
+		String tmpmail = attributes[7];
+		
+		
+		Lehrer tmp1Lehrer = new Lehrer(tmpnname, tmpvname, tmpkrzl, tmppersnr, tmpplz, tmpstrasse, tmptelnr, tmpmail);
+		
+	return 	tmp1Lehrer;
+	}
+	
+	public List<Lehrer> sort(int l, int r) {
+        int q;
+        if (l < r) {
+            q = partition(l, r);
+            sort(l, q);
+            sort(q + 1, r);
+        }
+        return lehrerList;
+    }
+
+    int partition(int l, int r) {
+
+        int i, j, x = lehrerList.get((l + r) / 2).getNname().charAt(0);
+        i = l - 1;
+        j = r + 1;
+        while (true) {
+            do {
+                i++;
+            } while (lehrerList.get(i).getNname().charAt(0) < x);
+
+            do {
+                j--;
+            } while (lehrerList.get(j).getNname().charAt(0) > x);
+
+            if (i < j) {
+                Lehrer k = lehrerList.get(i);
+                lehrerList.add(i,lehrerList.get(j));
+                lehrerList.add(j,k);
+            } else {
+                return j;
+            }
+        }
+    }
+	
+	
     
 }
     

@@ -7,11 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTabbedPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 
 import java.awt.Font;
 import java.text.ParseException;
@@ -29,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,6 +42,9 @@ import javax.swing.JTable;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 
 
@@ -72,6 +78,9 @@ public class GUI extends JFrame {
 	private JTextField persnrtxt;
 	private JTextField krzltxt;
 	private JTextField grundsonstigetxt;
+	
+	
+	String leLaden;
 
 //Start des Programms
 	public static void main(String[] args) {
@@ -209,7 +218,7 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Main.eingabeLuL(nnametxt.getText(), vnametxt.getText(), krzltxt.getText(), persnrtxt.getText(),
 						plztxt.getText(), strassetxt.getText(), telnrtxt.getText(), mailtxt.getText());
-				System.out.println(Main.Lehrerlist.get(0).getVname());
+				System.out.println(Main.lehrerList.get(0).getVname());
 				System.out.println("Lehrer "+ nnametxt.getText() +" gespeichert");
 			}
 		});
@@ -365,6 +374,44 @@ public class GUI extends JFrame {
 		lblBeiSontigeBitte.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblBeiSontigeBitte.setBounds(605, 93, 244, 50);
 		panelfz.add(lblBeiSontigeBitte);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 133, 22);
+		contentPane.add(menuBar);
+		
+		JMenu mnDatei = new JMenu("Datei");
+		menuBar.add(mnDatei);
+		
+		JMenuItem mntmSpeichern = new JMenuItem("Speichern");
+		mnDatei.add(mntmSpeichern);
+		
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		mnDatei.add(mntmExit);
+		
+		JMenu mnFunkt = new JMenu("Funktionen");
+		menuBar.add(mnFunkt);
+		
+		JMenuItem mntmLadLehr = new JMenuItem("Laden Lehrer");
+		mntmLadLehr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				leLaden = "" + Main.auswahl();
+				
+			}
+		});
+		mnFunkt.add(mntmLadLehr);
+		
+		JMenuItem mntmAktu = new JMenuItem("Aktualisieren");
+		mntmAktu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setup();
+			}
+		});
+		mnFunkt.add(mntmAktu);
 
 		
 //setupzeugs und so
@@ -392,8 +439,8 @@ public class GUI extends JFrame {
 			  tableModel2.removeRow(0);
 			}
 		
-		for(int i = 0; i<Main.Lehrerlist.size();i++){
-			Lehrer ltemp1 = Main.Lehrerlist.get(i);
+		for(int i = 0; i<Main.lehrerList.size();i++){
+			Lehrer ltemp1 = Main.lehrerList.get(i);
             String nametemp = ltemp1.getNname();
             
                for(int o = 1; o<ltemp1.getFlist().size();o++) {
@@ -437,8 +484,8 @@ public class GUI extends JFrame {
         while(krzlri.size() > 0) {
 			  krzlri.remove(0);
 			}
-		for(int i = 0; i<Main.Lehrerlist.size();i++){
-			Lehrer ltemp1 = Main.Lehrerlist.get(i);
+		for(int i = 0; i<Main.lehrerList.size();i++){
+			Lehrer ltemp1 = Main.lehrerList.get(i);
 			personri.add(ltemp1.getNname());
 			krzlri.add(ltemp1.getKrzl());
 		}
