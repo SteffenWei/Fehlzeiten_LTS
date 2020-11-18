@@ -350,6 +350,21 @@ public class GUI extends JFrame {
 		grundsonstigetxt.setColumns(10);
 		grundsonstigetxt.setBounds(390, 93, 200, 59);
 		panelfz.add(grundsonstigetxt);
+		
+		JButton btnFehlzeitLschen = new JButton("Fehlzeit l\u00F6schen");
+		btnFehlzeitLschen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnFehlzeitLschen.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnFehlzeitLschen.setBounds(422, 371, 285, 50);
+		panelfz.add(btnFehlzeitLschen);
+		
+		JLabel lblBeiSontigeBitte = new JLabel("bei sontige bitte ausf\u00FCllen");
+		lblBeiSontigeBitte.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblBeiSontigeBitte.setBounds(605, 93, 244, 50);
+		panelfz.add(lblBeiSontigeBitte);
 
 		
 //setupzeugs und so
@@ -386,7 +401,11 @@ public class GUI extends JFrame {
             	   
             	   String grundtemp;
             	   if(flztemp1.getFehlgrund().contentEquals("sonstige")) {
+            		   if(flztemp1.getGrundsonstige().contentEquals("")){
+            			   grundtemp = "sonstige";
+            		   }else{
             		   grundtemp = flztemp1.getGrundsonstige();
+            		   }
             	   }else {
             		   grundtemp = flztemp1.getFehlgrund();
             	   }
