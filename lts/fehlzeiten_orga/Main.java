@@ -106,8 +106,9 @@ protected void removeLehrer (String tmpname){
 		  Lehrer tmpLehrer = null; 
 		  for(int i = 0; i < Lehrerlist.size();i++){
 		  if(Lehrerlist.get(i).getNname().equals(tmpname)) { tmpLehrer =
-		  Lehrerlist.get(i); } } return tmpLehrer;
-		 
+		  Lehrerlist.get(i); } } System.out.println(tmpLehrer.toString()); 
+		  return tmpLehrer;
+	
 	}
 	
 	
