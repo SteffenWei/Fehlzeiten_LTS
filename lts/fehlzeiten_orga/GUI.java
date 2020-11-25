@@ -57,6 +57,7 @@ public class GUI extends JFrame {
 	public JComboBox persontxt = new JComboBox();
 	public JComboBox krzlctxt = new JComboBox();
 	public JComboBox grundtxt = new JComboBox(grundarray);
+	public JComboBox krzlctxt1 = new JComboBox();
 	public Object[] arraypers;
 	public List<String> personri = new ArrayList<String>();
 	public List<String> krzlri = new ArrayList<String>();
@@ -226,6 +227,41 @@ public class GUI extends JFrame {
 		btnNeuenLehrerAnlegen.setBounds(24, 416, 285, 50);
 		panellul.add(btnNeuenLehrerAnlegen);
 		
+		
+		krzlctxt1.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		krzlctxt1.setBounds(142, 11, 200, 59);
+		panellul.add(krzlctxt1);
+		
+		JButton btnEinsetzen = new JButton("einsetzen");
+		btnEinsetzen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			  String selectedKrzl1 = (String) krzlctxt1.getSelectedItem();
+				Lehrer ltemp11 = Lehrer.suche(selectedKrzl1);
+				if(selectedKrzl1 == ""){
+					nnametxt.setText("");
+					vnametxt.setText("");
+					krzltxt.setText("");
+					telnrtxt.setText("");
+					mailtxt.setText("");
+					persnrtxt.setText("");
+					plztxt.setText("");
+					strassetxt.setText("");
+				}else{
+				nnametxt.setText(ltemp11.getNname());
+				vnametxt.setText(ltemp11.getVname());
+				krzltxt.setText(ltemp11.getKrzl());
+				telnrtxt.setText(ltemp11.getTelnr());
+				mailtxt.setText(ltemp11.getMail());
+				persnrtxt.setText(ltemp11.getPersnr());
+				plztxt.setText(ltemp11.getPlz());
+				strassetxt.setText(ltemp11.getStrasse());
+				}
+			}
+		});
+		btnEinsetzen.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		btnEinsetzen.setBounds(370, 23, 150, 35);
+		panellul.add(btnEinsetzen);
+		
 		JButton btnRefresh = new JButton("aktualisieren");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -281,11 +317,11 @@ public class GUI extends JFrame {
 		panelfz.add(stundebistxt);
 		
 		persontxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		persontxt.setBounds(163, 23, 200, 59);
+		persontxt.setBounds(390, 23, 200, 59);
 		panelfz.add(persontxt);
 		
 		krzlctxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		krzlctxt.setBounds(390, 23, 200, 59);
+		krzlctxt.setBounds(163, 23, 200, 59);
 		panelfz.add(krzlctxt);
 		
 		JLabel lblLehrerinn = new JLabel("LehrerInn:");
@@ -334,6 +370,7 @@ public class GUI extends JFrame {
 				
 				String selectedGrund = (String) grundtxt.getSelectedItem();
 				String selectedLehrer = (String) persontxt.getSelectedItem();
+				String selectedKrzl = (String) krzlctxt.getSelectedItem();
 				Date date1 = null;
 				try {
 					date1 = new SimpleDateFormat("dd.MM.yyyy").parse(datumvontxt.getText());
@@ -347,7 +384,7 @@ public class GUI extends JFrame {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				Main.fzspeichern(selectedLehrer, selectedGrund, date1, date2, Integer.parseInt(stundevontxt.getText()), Integer.parseInt(stundebistxt.getText()), grundsonstigetxt.getText());
+				Main.fzspeichern(selectedLehrer, selectedGrund, date1, date2, Integer.parseInt(stundevontxt.getText()), Integer.parseInt(stundebistxt.getText()), grundsonstigetxt.getText(), selectedKrzl);
 			}
 		});
 		btnFehlzeitSpeichern.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -484,6 +521,10 @@ public class GUI extends JFrame {
         while(krzlri.size() > 0) {
 			  krzlri.remove(0);
 			}
+        
+        krzlri.add("");
+        personri.add("");
+        
 		for(int i = 0; i<Main.lehrerList.size();i++){
 			Lehrer ltemp1 = Main.lehrerList.get(i);
 			personri.add(ltemp1.getNname());
@@ -495,6 +536,7 @@ public class GUI extends JFrame {
 		System.out.println( Arrays.toString(arraykrzl) );
 		persontxt.setModel(new DefaultComboBoxModel(arraypers));
 		krzlctxt.setModel(new DefaultComboBoxModel(arraykrzl));
+		krzlctxt1.setModel(new DefaultComboBoxModel(arraykrzl));
 		
 	}
 	}

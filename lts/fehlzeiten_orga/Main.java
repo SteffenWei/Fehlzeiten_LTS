@@ -28,9 +28,14 @@ public class Main {
 
 	}
 
-	public static void fzspeichern(String nname, String fehlgrund, Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String grundsonstige) {
+	public static void fzspeichern(String nname, String fehlgrund, Date fehltagevon, Date fehltagebis, int fehlstundenvon, int fehlstundenbis, String grundsonstige, String krzl1) {
+		Lehrer tmplehrer = null;
+		if(nname == ""){tmplehrer = searchkrzl(krzl1);
+		}else{
+			tmplehrer = suche(nname);
+		}
+	
 		
-	Lehrer tmplehrer = suche(nname);
 	tmplehrer.addFehlzeiten(fehltagevon, fehltagebis, fehlstundenvon, fehlstundenbis, fehlgrund, grundsonstige);
 	
 	speichern();
@@ -95,7 +100,7 @@ protected void removeLehrer (String tmpname){
 		 edit.setNname(mail);
 	 }
 	
-	 protected Lehrer searchkrzl(String tmpkrzl) {
+	 protected static Lehrer searchkrzl(String tmpkrzl) {
 			
 			Lehrer tmpkrzl1 = null; 
 			  for(int i = 0; i < lehrerList.size();i++){

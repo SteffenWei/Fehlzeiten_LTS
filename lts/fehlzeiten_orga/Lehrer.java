@@ -168,20 +168,20 @@ public class Lehrer implements Serializable{
 */
 	protected void removeLehrer (String tmpKrzl){
 		
-		llist = Main.lehrerList;
+		
 		Lehrer tmpLehrer =  null;
-		for(int i = 0; i < llist.size();i++){
-		  if(llist.get(i).getKrzl().equals(tmpKrzl)) { tmpLehrer =
-		  llist.remove(i); }}}
+		for(int i = 0; i < Main.lehrerList.size();i++){
+		  if(Main.lehrerList.get(i).getKrzl().equals(tmpKrzl)) { tmpLehrer =
+				  Main.lehrerList.remove(i); }}}
 	
 //
-	protected static Lehrer suche(String tmpname) {
+	protected static Lehrer suche(String tmpkrzl) {
 		
 		llist = Main.lehrerList;
 
 		  Lehrer tmpLehrer = null; 
 		  for(int i = 0; i < llist.size();i++){
-		  if(llist.get(i).getNname().equals(tmpname)) { tmpLehrer =
+		  if(llist.get(i).getKrzl().equals(tmpkrzl)) { tmpLehrer =
 		  llist.get(i); } } return tmpLehrer;
 		 
 	}
