@@ -80,6 +80,7 @@ public class GUI extends JFrame {
 	private JTextField krzltxt;
 	private JTextField grundsonstigetxt;
 	
+	public static JFileChooser chooser = new JFileChooser();
 	
 	String leLaden;
 
@@ -437,6 +438,7 @@ public class GUI extends JFrame {
 		mntmLadLehr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				leLaden = "" + Main.auswahl();
+				Main.lehrerList = Main.loadLehrer(leLaden);
 				
 			}
 		});

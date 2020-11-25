@@ -196,7 +196,7 @@ protected void removeLehrer (String tmpname){
 
 	    if ( state == JFileChooser.APPROVE_OPTION )
 	    {
-	      File file = fc.getSelectedFile();
+	      File file = fc.getSelectedFile().getAbsoluteFile();
 	      System.out.println( file.getName() );
 	      return file.getName();
 	    }
@@ -206,7 +206,7 @@ protected void removeLehrer (String tmpname){
 	  }
     
     
-    private List<Lehrer> loadLehrer(String adrLehr) {
+    public static List<Lehrer> loadLehrer(String adrLehr) {
 		List <Lehrer> tmpLehrerlist = new ArrayList<Lehrer>();
     	Path pathToLehrer = Paths.get(adrLehr);
 		try (BufferedReader br = Files.newBufferedReader(pathToLehrer, StandardCharsets.ISO_8859_1))
@@ -234,7 +234,7 @@ protected void removeLehrer (String tmpname){
 			}
 		
 	
-	private Lehrer createLehrer(String[] attributes) {
+	private static Lehrer createLehrer(String[] attributes) {
 		String tmpnname = attributes[0];
 		String tmpvname = attributes[1];
 		String tmpkrzl = attributes[2]; 
