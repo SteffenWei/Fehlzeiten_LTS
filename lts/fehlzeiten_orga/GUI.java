@@ -434,7 +434,7 @@ public class GUI extends JFrame {
 		JMenu mnFunkt = new JMenu("Funktionen");
 		menuBar.add(mnFunkt);
 		
-		JMenuItem mntmLadLehr = new JMenuItem("Laden Lehrer");
+		JMenuItem mntmLadLehr = new JMenuItem("Lehrer laden");
 		mntmLadLehr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				leLaden = "" + Main.auswahl();
@@ -451,6 +451,16 @@ public class GUI extends JFrame {
 			}
 		});
 		mnFunkt.add(mntmAktu);
+		
+		JMenuItem mntmExpLehr = new JMenuItem("Lehrer exportieren");
+		mntmExpLehr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				leLaden = "" + Main.auswahlSpei();
+				Main.export(leLaden);
+			}
+		});
+		mnFunkt.add(mntmExpLehr);
+		
 
 		
 //setupzeugs und so

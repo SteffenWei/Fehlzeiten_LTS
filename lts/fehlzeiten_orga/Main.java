@@ -7,9 +7,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -23,6 +26,7 @@ import java.util.Date;
 public class Main {
 
 	public static List<Lehrer> lehrerList = new ArrayList<Lehrer>();
+	private static final String endsign = System.getProperty("line.separator");
 
 	public static void main(String args[]) {
 
@@ -205,6 +209,23 @@ protected void removeLehrer (String tmpname){
 	      return "Abgebrochen";
 	  }
     
+    protected static String auswahlSpei() {
+		JFileChooser fc = new JFileChooser();
+	    fc.setFileFilter( new FileNameExtensionFilter("Textdateien", ".txt", "*.html", "*.log", "*.csv" ) );
+
+	    int state = fc.showSaveDialog( null );
+
+	    if ( state == JFileChooser.APPROVE_OPTION )
+	    {
+	      File file = fc.getSelectedFile().getAbsoluteFile();
+	      System.out.println( file.getName() );
+	      return file.getAbsolutePath();
+	    }
+	    else
+	      System.out.println( "Auswahl abgebrochen" );
+	      return "Abgebrochen";
+	  }
+    
     
     public static List<Lehrer> loadLehrer(String adrLehr) {
 		List <Lehrer> tmpLehrerlist = new ArrayList<Lehrer>();
@@ -283,6 +304,37 @@ protected void removeLehrer (String tmpname){
                 return j;
             }
         }
+    }
+    
+    
+    public static void export(String adr) {
+    	File file = new File(adr);
+    	try {
+			file.createNewFile();
+			FileReader fr = new FileReader(file);
+	        BufferedReader br = new BufferedReader(fr);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+            	
+    	String ausg = "";
+    	for(int i = 0; i<lehrerList.size();i++) {
+    		ausg = ausg + lehrerList.get(i).getNname() + "," +  lehrerList.get(i).getVname() + "," +  lehrerList.get(i).getKrzl() + "," +  lehrerList.get(i).getPersnr() + "," +  lehrerList.get(i).getPlz() + "," +  lehrerList.get(i).getStrasse() + "," +  lehrerList.get(i).getTelnr() + "," +  lehrerList.get(i).getMail() + endsign;
+    	}
+    	FileWriter fw;
+		try {
+			fw = new FileWriter(adr);
+			BufferedWriter bw = new BufferedWriter(fw);
+	        
+	        bw.write(ausg);
+	        bw.close();
+	        
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
     }
 	
 	
