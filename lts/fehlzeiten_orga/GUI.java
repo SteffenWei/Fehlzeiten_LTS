@@ -13,6 +13,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
 import java.awt.Font;
@@ -45,6 +46,7 @@ import javax.swing.JToolBar;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 
 
@@ -420,6 +422,20 @@ public class GUI extends JFrame {
 		JMenu mnDatei = new JMenu("Datei");
 		menuBar.add(mnDatei);
 		
+		JMenuItem mntmTeam = new JMenuItem("Team");
+		mntmTeam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JDialog teJDi = new JDialog();
+		        teJDi.setTitle("Das Team");
+		        teJDi.setSize(600,400);
+		        teJDi.setModal(true);
+		        teJDi.add(new JLabel("Hier müsste usner Text stehen!"));
+		        teJDi.setVisible(true);
+			}
+		});
+		mnDatei.add(mntmTeam);
+		
 		JMenuItem mntmSpeichern = new JMenuItem("Speichern");
 		mnDatei.add(mntmSpeichern);
 		
@@ -444,14 +460,6 @@ public class GUI extends JFrame {
 		});
 		mnFunkt.add(mntmLadLehr);
 		
-		JMenuItem mntmAktu = new JMenuItem("Aktualisieren");
-		mntmAktu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setup();
-			}
-		});
-		mnFunkt.add(mntmAktu);
-		
 		JMenuItem mntmExpLehr = new JMenuItem("Lehrer exportieren");
 		mntmExpLehr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -460,6 +468,16 @@ public class GUI extends JFrame {
 			}
 		});
 		mnFunkt.add(mntmExpLehr);
+		
+		JMenuItem mntmAktu = new JMenuItem("Aktualisieren");
+		mntmAktu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setup();
+			}
+		});
+		mnFunkt.add(mntmAktu);
+		
+		
 		
 
 		
