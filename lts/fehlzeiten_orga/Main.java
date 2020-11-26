@@ -198,7 +198,7 @@ protected void removeLehrer (String tmpname){
 	    {
 	      File file = fc.getSelectedFile().getAbsoluteFile();
 	      System.out.println( file.getName() );
-	      return file.getName();
+	      return file.getAbsolutePath();
 	    }
 	    else
 	      System.out.println( "Auswahl abgebrochen" );
@@ -209,6 +209,7 @@ protected void removeLehrer (String tmpname){
     public static List<Lehrer> loadLehrer(String adrLehr) {
 		List <Lehrer> tmpLehrerlist = new ArrayList<Lehrer>();
     	Path pathToLehrer = Paths.get(adrLehr);
+    	System.out.println(adrLehr);
 		try (BufferedReader br = Files.newBufferedReader(pathToLehrer, StandardCharsets.ISO_8859_1))
 		{ 
 			String line = br.readLine(); 
