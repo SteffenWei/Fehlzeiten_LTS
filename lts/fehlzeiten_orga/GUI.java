@@ -63,9 +63,11 @@ public class GUI extends JFrame {
 	public JComboBox grundtxt = new JComboBox(grundarray);
 	public JComboBox krzlctxt1 = new JComboBox();
 	public JComboBox krzlctxt1_fz = new JComboBox();
+	public JComboBox fzload = new JComboBox();
 	public Object[] arraypers;
 	public List<String> personri = new ArrayList<String>();
 	public List<String> krzlri = new ArrayList<String>();
+	public List<String> fehlzeitri = new ArrayList<String>();
 	private JPanel contentPane;
 	private JTextField datumvontxt;
 	private JTextField datumbistxt;
@@ -354,18 +356,65 @@ public class GUI extends JFrame {
 		lblSonstige.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblSonstige.setBounds(430, 133, 85, 35);
 		panelFzLoad.add(lblSonstige);
+		krzlctxt1_fz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String auswahl = (String)krzlctxt1_fz.getSelectedItem();
+				Lehrer tmpLehrer = Main.searchkrzl(auswahl);
+				
+				while(fehlzeitri.size() > 0) {
+					  fehlzeitri.remove(0);
+					}
+				
+				for(int i = 1; i<tmpLehrer.getFlist().size();i++){
+					Fehlzeiten lfehlzeit = tmpLehrer.getFlist().get(i);
+					fehlzeitri.add(""+lfehlzeit.getFehltagevon());
+				}
+				Object[] arrayfz = fehlzeitri.toArray();
+				fzload.setModel(new DefaultComboBoxModel(arrayfz));
+			}
+		});
 		
 		
 		krzlctxt1_fz.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		krzlctxt1_fz.setBounds(44, 22, 200, 59);
 		panelFzLoad.add(krzlctxt1_fz);
 		
-		JComboBox fzload = new JComboBox();
+		
 		fzload.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		fzload.setBounds(309, 22, 200, 59);
 		panelFzLoad.add(fzload);
 		
 		JButton btnLadFz = new JButton("Laden");
+		btnLadFz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String auswahlLul = "";
+				auswahlLul= (String)krzlctxt1_fz.getSelectedItem();
+				Lehrer tmpLehrer = Main.searchkrzl(auswahlLul);
+				
+				String auswahlFz =  "";
+				auswahlFz =(String)fzload.getSelectedItem();
+				
+				Fehlzeiten lfehlzeit = null;
+				
+				
+				if( !(auswahlLul.equals("")) && !(auswahlFz.equals(""))) {
+					for(int i = 1; i<tmpLehrer.getFlist().size();i++){
+						lfehlzeit = tmpLehrer.getFlist().get(i);
+						if (lfehlzeit.getFehltagevon().equals(fzload.getSelectedItem())) {
+							break;
+						} 
+					}
+					txtgnd.setText(lfehlzeit.getFehlgrund());
+					txtSonst.setText(lfehlzeit.getGrundsonstige());
+					txtTagVo.setText("" + lfehlzeit.getFehltagevon());
+					txtTagBis.setText("" + lfehlzeit.getFehltagebis());
+					txtStdVo.setText("" + lfehlzeit.getFehlstundenvon());
+					txtStdBis.setText("" + lfehlzeit.getFehlstundenbis());
+					
+				}
+				
+			}
+		});
 		btnLadFz.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnLadFz.setBounds(572, 34, 141, 35);
 		panelFzLoad.add(btnLadFz);

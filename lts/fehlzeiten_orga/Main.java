@@ -336,8 +336,7 @@ protected void removeLehrer (String tmpname){
 		}
         
     }
-	
-	
+
     
 }
     
