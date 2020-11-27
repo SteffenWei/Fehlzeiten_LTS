@@ -1,10 +1,11 @@
 package fehlzeiten_orga;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import fehlzeiten_orga.Main;
 
-public class Fehlzeiten {
+public class Fehlzeiten implements Serializable{
 
 	private Date fehltagevon;
 	private Date fehltagebis;
