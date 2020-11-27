@@ -234,10 +234,23 @@ public class GUI extends JFrame {
 		JButton btnNeuenLehrerAnlegen = new JButton("neuen Lehrer anlegen");
 		btnNeuenLehrerAnlegen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				if(!Main.enthalten(krzltxt.getText())) {
+				
 				Main.eingabeLuL(nnametxt.getText(), vnametxt.getText(), krzltxt.getText(), persnrtxt.getText(),
 						plztxt.getText(), strassetxt.getText(), telnrtxt.getText(), mailtxt.getText());
 				System.out.println(Main.lehrerList.get(0).getVname());
 				System.out.println("Lehrer "+ nnametxt.getText() +" gespeichert");
+			}else {
+				int position = Main.position(krzltxt.getText());
+				Lehrer tmpLehrer = new Lehrer(nnametxt.getText(), vnametxt.getText(), krzltxt.getText(), persnrtxt.getText(),
+						plztxt.getText(), strassetxt.getText(), telnrtxt.getText(), mailtxt.getText());
+				
+				Main.lehrerList.remove(position);
+				Main.lehrerList.add(position, tmpLehrer);
+				
+			}
+				
 			}
 		});
 		btnNeuenLehrerAnlegen.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -473,6 +486,9 @@ public class GUI extends JFrame {
 					int luLposition = Main.position(tmpLehrer.getKrzl());
 					Main.lehrerList.remove(luLposition);
 					Main.lehrerList.add(luLposition,tmpLehrer);
+					
+					
+					//Liste Fehlzeiten neu Inhalt laden
 					
 				}
 				

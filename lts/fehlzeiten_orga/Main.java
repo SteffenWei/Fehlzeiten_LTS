@@ -346,6 +346,18 @@ protected void removeLehrer (String tmpname){
 		return tmppos;
 	}
 
+	public static boolean enthalten(String tmpkrzl) {
+		boolean vorhanden = false;
+		
+		int tmppos = 0;
+		  for(int i = 0; i < lehrerList.size();i++){
+		  if(lehrerList.get(i).getKrzl().equals(tmpkrzl)) 
+		  	{ vorhanden = true;
+		  	break;} } 
+		
+		return vorhanden;
+	}
+
     
 }
     
