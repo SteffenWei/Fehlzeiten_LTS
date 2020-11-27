@@ -47,6 +47,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import java.awt.Color;
 
 
 
@@ -85,6 +86,12 @@ public class GUI extends JFrame {
 	public static JFileChooser chooser = new JFileChooser();
 	
 	String leLaden;
+	private JTextField txtSonst;
+	private JTextField txtgnd;
+	private JTextField txtStdVo;
+	private JTextField txtTagVo;
+	private JTextField txtTagBis;
+	private JTextField txtStdBis;
 
 //Start des Programms
 	public static void main(String[] args) {
@@ -274,6 +281,97 @@ public class GUI extends JFrame {
 		btnRefresh.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		btnRefresh.setBounds(572, 0, 150, 35);
 		contentPane.add(btnRefresh);
+		
+		JPanel panelFzLoad = new JPanel();
+		panelFzLoad.setBackground(Color.LIGHT_GRAY);
+		tabbedPane.addTab("Fehlzeiten", null, panelFzLoad, null);
+		panelFzLoad.setLayout(null);
+		
+		txtSonst = new JTextField();
+		txtSonst.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		txtSonst.setBounds(533, 120, 200, 59);
+		panelFzLoad.add(txtSonst);
+		txtSonst.setColumns(10);
+		
+		txtgnd = new JTextField();
+		txtgnd.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		txtgnd.setColumns(10);
+		txtgnd.setBounds(131, 120, 200, 59);
+		panelFzLoad.add(txtgnd);
+		
+		txtStdVo = new JTextField();
+		txtStdVo.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		txtStdVo.setColumns(10);
+		txtStdVo.setBounds(131, 320, 200, 59);
+		panelFzLoad.add(txtStdVo);
+		
+		txtTagVo = new JTextField();
+		txtTagVo.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		txtTagVo.setColumns(10);
+		txtTagVo.setBounds(131, 220, 200, 59);
+		panelFzLoad.add(txtTagVo);
+		
+		txtTagBis = new JTextField();
+		txtTagBis.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		txtTagBis.setColumns(10);
+		txtTagBis.setBounds(533, 220, 200, 59);
+		panelFzLoad.add(txtTagBis);
+		
+		txtStdBis = new JTextField();
+		txtStdBis.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		txtStdBis.setColumns(10);
+		txtStdBis.setBounds(533, 320, 200, 59);
+		panelFzLoad.add(txtStdBis);
+		
+		JLabel lblNewLabel = new JLabel("Grund");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblNewLabel.setBounds(10, 133, 90, 35);
+		panelFzLoad.add(lblNewLabel);
+		
+		JLabel lblTagVon = new JLabel("Tag von");
+		lblTagVon.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblTagVon.setBounds(10, 233, 90, 35);
+		panelFzLoad.add(lblTagVon);
+		
+		JLabel lblStundeVon = new JLabel("Stunde von");
+		lblStundeVon.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblStundeVon.setBounds(10, 333, 101, 35);
+		panelFzLoad.add(lblStundeVon);
+		
+		JLabel lblBis_2 = new JLabel("bis");
+		lblBis_2.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblBis_2.setBounds(430, 333, 53, 35);
+		panelFzLoad.add(lblBis_2);
+		
+		JLabel lblBis_1 = new JLabel("bis");
+		lblBis_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblBis_1.setBounds(430, 234, 53, 35);
+		panelFzLoad.add(lblBis_1);
+		
+		JLabel lblSonstige = new JLabel("sonstige");
+		lblSonstige.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblSonstige.setBounds(430, 133, 85, 35);
+		panelFzLoad.add(lblSonstige);
+		
+		JComboBox krzlctxt1_fz = new JComboBox();
+		krzlctxt1_fz.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		krzlctxt1_fz.setBounds(44, 22, 200, 59);
+		panelFzLoad.add(krzlctxt1_fz);
+		
+		JComboBox fzload = new JComboBox();
+		fzload.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		fzload.setBounds(309, 22, 200, 59);
+		panelFzLoad.add(fzload);
+		
+		JButton btnLadFz = new JButton("Laden");
+		btnLadFz.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnLadFz.setBounds(572, 34, 141, 35);
+		panelFzLoad.add(btnLadFz);
+		
+		JButton btnSpeichern = new JButton("speichern");
+		btnSpeichern.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnSpeichern.setBounds(668, 419, 141, 35);
+		panelFzLoad.add(btnSpeichern);
 		
 		JScrollPane scrollPanefzl = new JScrollPane();
 		tabbedPane.addTab("Fehlzeitenliste", null, scrollPanefzl, null);
