@@ -48,6 +48,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import java.awt.Color;
+import java.awt.SystemColor;
 
 
 
@@ -61,6 +62,7 @@ public class GUI extends JFrame {
 	public JComboBox krzlctxt = new JComboBox();
 	public JComboBox grundtxt = new JComboBox(grundarray);
 	public JComboBox krzlctxt1 = new JComboBox();
+	public JComboBox krzlctxt1_fz = new JComboBox();
 	public Object[] arraypers;
 	public List<String> personri = new ArrayList<String>();
 	public List<String> krzlri = new ArrayList<String>();
@@ -283,8 +285,8 @@ public class GUI extends JFrame {
 		contentPane.add(btnRefresh);
 		
 		JPanel panelFzLoad = new JPanel();
-		panelFzLoad.setBackground(Color.LIGHT_GRAY);
-		tabbedPane.addTab("Fehlzeiten", null, panelFzLoad, null);
+		panelFzLoad.setBackground(SystemColor.menu);
+		tabbedPane.addTab("Fehlzeiten \u00E4ndern", null, panelFzLoad, null);
 		panelFzLoad.setLayout(null);
 		
 		txtSonst = new JTextField();
@@ -353,7 +355,7 @@ public class GUI extends JFrame {
 		lblSonstige.setBounds(430, 133, 85, 35);
 		panelFzLoad.add(lblSonstige);
 		
-		JComboBox krzlctxt1_fz = new JComboBox();
+		
 		krzlctxt1_fz.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		krzlctxt1_fz.setBounds(44, 22, 200, 59);
 		panelFzLoad.add(krzlctxt1_fz);
@@ -670,6 +672,10 @@ public class GUI extends JFrame {
 		persontxt.setModel(new DefaultComboBoxModel(arraypers));
 		krzlctxt.setModel(new DefaultComboBoxModel(arraykrzl));
 		krzlctxt1.setModel(new DefaultComboBoxModel(arraykrzl));
+		
+		krzlctxt1_fz.setModel(new DefaultComboBoxModel(arraykrzl));
+		
+		// Methode zum Einfügen der Fehlzeiten noch eintragen
 		
 	}
 	}
