@@ -294,6 +294,20 @@ public class GUI extends JFrame {
 		btnEinsetzen.setBounds(370, 23, 150, 35);
 		panellul.add(btnEinsetzen);
 		
+		//Lehrer löschen
+		JButton btnLulLoeschen = new JButton("LehrerIn l\u00F6schen");
+		btnLulLoeschen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!(krzltxt.getText().equals(""))) {
+					int position = Main.position(krzltxt.getText());
+					Main.lehrerList.remove(position);
+				}				
+			}
+		});
+		btnLulLoeschen.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnLulLoeschen.setBounds(408, 416, 285, 50);
+		panellul.add(btnLulLoeschen);
+		
 		JButton btnRefresh = new JButton("aktualisieren");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -404,7 +418,7 @@ public class GUI extends JFrame {
 		panelFzLoad.add(fzload);
 		
 		//Fehlzeiten in Felder laden
-		JButton btnLadFz = new JButton("Laden");
+		JButton btnLadFz = new JButton("laden");
 		btnLadFz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String auswahlLul = "";
@@ -503,7 +517,7 @@ public class GUI extends JFrame {
 			}
 		});
 		btnSpeichern.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnSpeichern.setBounds(668, 419, 141, 35);
+		btnSpeichern.setBounds(650, 400, 141, 35);
 		panelFzLoad.add(btnSpeichern);
 		
 		JButton btnFehlzeitLschen = new JButton("l\u00F6schen");
@@ -541,7 +555,7 @@ public class GUI extends JFrame {
 			}
 		});
 		btnFehlzeitLschen.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnFehlzeitLschen.setBounds(668, 465, 141, 35);
+		btnFehlzeitLschen.setBounds(650, 450, 141, 35);
 		panelFzLoad.add(btnFehlzeitLschen);
 		
 		JScrollPane scrollPanefzl = new JScrollPane();
