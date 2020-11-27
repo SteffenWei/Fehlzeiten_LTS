@@ -94,7 +94,7 @@ public class GUI extends JFrame {
 	
 	String leLaden;
 	private JTextField txtSonst;
-	private JTextField txtgnd;
+	private JComboBox txtgnd = new JComboBox(grundarray);
 	private JTextField txtStdVo;
 	private JTextField txtTagVo;
 	private JTextField txtTagBis;
@@ -313,9 +313,8 @@ public class GUI extends JFrame {
 		panelFzLoad.add(txtSonst);
 		txtSonst.setColumns(10);
 		
-		txtgnd = new JTextField();
+		
 		txtgnd.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		txtgnd.setColumns(10);
 		txtgnd.setBounds(131, 120, 200, 59);
 		panelFzLoad.add(txtgnd);
 		
@@ -420,7 +419,10 @@ public class GUI extends JFrame {
 							break;
 						} 
 					}
-					txtgnd.setText(lfehlzeit.getFehlgrund());
+					
+					int indexgrund = sucheGrund(lfehlzeit.getFehlgrund());
+					
+					txtgnd.setSelectedIndex(indexgrund);
 					txtSonst.setText(lfehlzeit.getGrundsonstige());
 					txtTagVo.setText(formatter.format(lfehlzeit.getFehltagevon()));
 					txtTagBis.setText(formatter.format(lfehlzeit.getFehltagebis()));
@@ -430,6 +432,8 @@ public class GUI extends JFrame {
 				}
 				
 			}
+
+			
 		});
 		btnLadFz.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnLadFz.setBounds(572, 34, 141, 35);
@@ -459,7 +463,9 @@ public class GUI extends JFrame {
 						} 
 					}
 					
-					lfehlzeit.setFehlgrund(txtgnd.getText());
+					int indexgrund = sucheGrund(""+ txtgnd.getSelectedItem());
+					
+					lfehlzeit.setFehlgrund(grundarray[indexgrund]);
 					lfehlzeit.setGrundsonstige(txtSonst.getText());
 					Date date1 = null;
 					try {
@@ -766,6 +772,17 @@ public class GUI extends JFrame {
             tableModel2.addRow(tbltemp2);
 		}
 		
+	}
+	
+	private int sucheGrund(String fehlgrund) {
+		int wert = 0;
+		for(int i = 0; i < grundarray.length; i++) {
+			if(fehlgrund.equals(grundarray[i])) {
+				wert = i;
+				break;
+			}
+		}
+		return wert;
 	}
 	
 	public void setup(){
