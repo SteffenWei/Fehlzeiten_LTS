@@ -55,7 +55,7 @@ public class GUI extends JFrame {
 	public String col2[] = {"Vorname", "Nachname", "Kürzel", "Personalnr", "PLZ", "Straße", "TelNr.", "Mail"};
 	public DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 	public DefaultTableModel tableModel2 = new DefaultTableModel(col2, 0);
-	public String[] grundarray = {"Krankheit", "Durchfall", "keine Lust", "Simon", "sonstige"};
+	public String[] grundarray = {"Krankheit", "Tod eines Familienmitglieds", "Umzug aus dienstl. Gründen", "Arbeitsjubiläum", "Schwere Erkrankung Angehöriger, betreute Person" , "Fortbildung" , "Ausübung öffentlicher Ehrenämter" , "Ausbildung von LiV" , "sonstige"};
 	public JComboBox persontxt = new JComboBox();
 	public JComboBox krzlctxt = new JComboBox();
 	public JComboBox grundtxt = new JComboBox(grundarray);
@@ -327,7 +327,7 @@ public class GUI extends JFrame {
 		krzlctxt.setBounds(163, 23, 200, 59);
 		panelfz.add(krzlctxt);
 		
-		JLabel lblLehrerinn = new JLabel("LehrerInn:");
+		JLabel lblLehrerinn = new JLabel("LehrerIn:");
 		lblLehrerinn.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblLehrerinn.setBounds(10, 27, 131, 50);
 		panelfz.add(lblLehrerinn);
@@ -411,9 +411,14 @@ public class GUI extends JFrame {
 		panelfz.add(btnFehlzeitLschen);
 		
 		JLabel lblBeiSontigeBitte = new JLabel("bei sontige bitte ausf\u00FCllen");
-		lblBeiSontigeBitte.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblBeiSontigeBitte.setBounds(605, 93, 244, 50);
+		lblBeiSontigeBitte.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblBeiSontigeBitte.setBounds(600, 82, 244, 37);
 		panelfz.add(lblBeiSontigeBitte);
+		
+		JLabel lblOderFrWeitere = new JLabel("oder f\u00FCr weitere Informationen");
+		lblOderFrWeitere.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblOderFrWeitere.setBounds(600, 115, 244, 37);
+		panelfz.add(lblOderFrWeitere);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 133, 22);
@@ -430,7 +435,7 @@ public class GUI extends JFrame {
 		        teJDi.setTitle("Das Team");
 		        teJDi.setSize(600,400);
 		        teJDi.setModal(true);
-		        teJDi.add(new JLabel("Hier müsste usner Text stehen!"));
+		        teJDi.getContentPane().add(new JLabel("Hier müsste unser Text stehen!"));
 		        teJDi.setVisible(true);
 			}
 		});
