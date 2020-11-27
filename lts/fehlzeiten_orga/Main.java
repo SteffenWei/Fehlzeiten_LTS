@@ -337,6 +337,15 @@ protected void removeLehrer (String tmpname){
         
     }
 
+	public static int position(String tmpkrzl) {
+		int tmppos = 0;
+		  for(int i = 0; i < lehrerList.size();i++){
+		  if(lehrerList.get(i).getKrzl().equals(tmpkrzl)) 
+		  	{ tmppos = i;
+		  	break;} } 
+		return tmppos;
+	}
+
     
 }
     

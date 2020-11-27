@@ -17,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
 import java.awt.Font;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -86,6 +87,8 @@ public class GUI extends JFrame {
 	private JTextField persnrtxt;
 	private JTextField krzltxt;
 	private JTextField grundsonstigetxt;
+	
+	private DateFormat formatter = new SimpleDateFormat("dd.MM.yyy");
 	
 	public static JFileChooser chooser = new JFileChooser();
 	
@@ -366,8 +369,8 @@ public class GUI extends JFrame {
 					}
 				
 				for(int i = 1; i<tmpLehrer.getFlist().size();i++){
-					Fehlzeiten lfehlzeit = tmpLehrer.getFlist().get(i);
-					fehlzeitri.add(""+lfehlzeit.getFehltagevon());
+					Fehlzeiten lfehlzeit = tmpLehrer.getFlist().get(i);	
+					fehlzeitri.add(formatter.format(lfehlzeit.getFehltagevon()));
 				}
 				Object[] arrayfz = fehlzeitri.toArray();
 				fzload.setModel(new DefaultComboBoxModel(arrayfz));
@@ -406,8 +409,8 @@ public class GUI extends JFrame {
 					}
 					txtgnd.setText(lfehlzeit.getFehlgrund());
 					txtSonst.setText(lfehlzeit.getGrundsonstige());
-					txtTagVo.setText("" + lfehlzeit.getFehltagevon());
-					txtTagBis.setText("" + lfehlzeit.getFehltagebis());
+					txtTagVo.setText(formatter.format(lfehlzeit.getFehltagevon()));
+					txtTagBis.setText(formatter.format(lfehlzeit.getFehltagebis()));
 					txtStdVo.setText("" + lfehlzeit.getFehlstundenvon());
 					txtStdBis.setText("" + lfehlzeit.getFehlstundenbis());
 					
@@ -419,7 +422,62 @@ public class GUI extends JFrame {
 		btnLadFz.setBounds(572, 34, 141, 35);
 		panelFzLoad.add(btnLadFz);
 		
+		//Speichern Fehlzeiten verändert
 		JButton btnSpeichern = new JButton("speichern");
+		btnSpeichern.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String auswahlLul = "";
+				auswahlLul= (String)krzlctxt1_fz.getSelectedItem();
+				Lehrer tmpLehrer = Main.searchkrzl(auswahlLul);
+				
+				String auswahlFz =  "";
+				auswahlFz =(String)fzload.getSelectedItem();
+				
+				Fehlzeiten lfehlzeit = null;
+				
+				
+				if( !(auswahlLul.equals("")) && !(auswahlFz.equals(""))) {
+					int position = 0;
+					for(int i = 1; i<tmpLehrer.getFlist().size();i++){
+						lfehlzeit = tmpLehrer.getFlist().get(i);
+						if (lfehlzeit.getFehltagevon().equals(fzload.getSelectedItem())) {
+							position = i;
+							break;
+						} 
+					}
+					
+					lfehlzeit.setFehlgrund(txtgnd.getText());
+					lfehlzeit.setGrundsonstige(txtSonst.getText());
+					Date date1 = null;
+					try {
+						date1 = new SimpleDateFormat("dd.MM.yyyy").parse(txtTagVo.getText());
+					} catch (ParseException e1) {
+						JOptionPane.showMessageDialog(null, "Datum bitte im Format tt.mm.yyyy eingeben");
+						e1.printStackTrace();
+					}
+					Date date2 = null;
+					try {
+						date2 = new SimpleDateFormat("dd.MM.yyyy").parse(txtTagBis.getText());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
+					lfehlzeit.setFehltagevon(date1);
+					lfehlzeit.setFehltagebis(date2);
+					lfehlzeit.setFehlstundenvon(Integer.parseInt(txtStdVo.getText()));
+					lfehlzeit.setFehlstundenbis(Integer.parseInt(txtStdBis.getText()));	
+					
+					tmpLehrer.getFlist().remove(position);
+					
+					tmpLehrer.getFlist().add(position, lfehlzeit);	
+					
+					int luLposition = Main.position(tmpLehrer.getKrzl());
+					Main.lehrerList.remove(luLposition);
+					Main.lehrerList.add(luLposition,tmpLehrer);
+					
+				}
+				
+			}
+		});
 		btnSpeichern.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnSpeichern.setBounds(668, 419, 141, 35);
 		panelFzLoad.add(btnSpeichern);
