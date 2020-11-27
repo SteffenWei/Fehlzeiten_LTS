@@ -231,6 +231,7 @@ public class GUI extends JFrame {
 		lblMail.setBounds(408, 329, 131, 50);
 		panellul.add(lblMail);
 		
+		//Neuen Lehrer anlegen + Auswahl ob schon vorhanden
 		JButton btnNeuenLehrerAnlegen = new JButton("neuen Lehrer anlegen");
 		btnNeuenLehrerAnlegen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -262,6 +263,7 @@ public class GUI extends JFrame {
 		krzlctxt1.setBounds(142, 11, 200, 59);
 		panellul.add(krzlctxt1);
 		
+		//Lehrerdaten einsatzen
 		JButton btnEinsetzen = new JButton("einsetzen");
 		btnEinsetzen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -367,6 +369,8 @@ public class GUI extends JFrame {
 		lblBis_1.setBounds(430, 234, 53, 35);
 		panelFzLoad.add(lblBis_1);
 		
+		
+		//Fehlzeiten des LuL in ComboBox laden
 		JLabel lblSonstige = new JLabel("sonstige");
 		lblSonstige.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblSonstige.setBounds(430, 133, 85, 35);
@@ -399,6 +403,7 @@ public class GUI extends JFrame {
 		fzload.setBounds(309, 22, 200, 59);
 		panelFzLoad.add(fzload);
 		
+		//Fehlzeiten in Felder laden
 		JButton btnLadFz = new JButton("Laden");
 		btnLadFz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -411,7 +416,7 @@ public class GUI extends JFrame {
 				
 				Fehlzeiten lfehlzeit = null;
 				
-				
+				//Passende Fehlzeit suchen
 				if( !(auswahlLul.equals("")) && !(auswahlFz.equals(""))) {
 					for(int i = 1; i<tmpLehrer.getFlist().size();i++){
 						lfehlzeit = tmpLehrer.getFlist().get(i);
@@ -492,10 +497,7 @@ public class GUI extends JFrame {
 					int luLposition = Main.position(tmpLehrer.getKrzl());
 					Main.lehrerList.remove(luLposition);
 					Main.lehrerList.add(luLposition,tmpLehrer);
-					
-					
-					//Liste Fehlzeiten neu Inhalt laden
-					
+								
 				}
 				
 			}
@@ -503,6 +505,44 @@ public class GUI extends JFrame {
 		btnSpeichern.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnSpeichern.setBounds(668, 419, 141, 35);
 		panelFzLoad.add(btnSpeichern);
+		
+		JButton btnFehlzeitLschen = new JButton("l\u00F6schen");
+		btnFehlzeitLschen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String auswahlLul = "";
+				auswahlLul= (String)krzlctxt1_fz.getSelectedItem();
+				Lehrer tmpLehrer = Main.searchkrzl(auswahlLul);
+				
+				String auswahlFz =  "";
+				auswahlFz =(String)fzload.getSelectedItem();
+				
+				Fehlzeiten lfehlzeit = null;
+				
+				
+				if( !(auswahlLul.equals("")) && !(auswahlFz.equals(""))) {
+					int position = 0;
+					for(int i = 1; i<tmpLehrer.getFlist().size();i++){
+						lfehlzeit = tmpLehrer.getFlist().get(i);
+						if (lfehlzeit.getFehltagevon().equals(fzload.getSelectedItem())) {
+							position = i;
+							break;
+						} 
+					}
+							
+					tmpLehrer.getFlist().remove(position);
+										
+					int luLposition = Main.position(tmpLehrer.getKrzl());
+					Main.lehrerList.remove(luLposition);
+					Main.lehrerList.add(luLposition,tmpLehrer);
+								
+				}
+				
+				
+			}
+		});
+		btnFehlzeitLschen.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnFehlzeitLschen.setBounds(668, 465, 141, 35);
+		panelFzLoad.add(btnFehlzeitLschen);
 		
 		JScrollPane scrollPanefzl = new JScrollPane();
 		tabbedPane.addTab("Fehlzeitenliste", null, scrollPanefzl, null);
@@ -596,6 +636,7 @@ public class GUI extends JFrame {
 		label_1.setBounds(10, 441, 131, 50);
 		panelfz.add(label_1);
 		
+		//Fehlzeit speichern
 		JButton btnFehlzeitSpeichern = new JButton("Fehlzeit speichern");
 		btnFehlzeitSpeichern.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -628,16 +669,6 @@ public class GUI extends JFrame {
 		grundsonstigetxt.setColumns(10);
 		grundsonstigetxt.setBounds(390, 93, 200, 59);
 		panelfz.add(grundsonstigetxt);
-		
-		JButton btnFehlzeitLschen = new JButton("Fehlzeit l\u00F6schen");
-		btnFehlzeitLschen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		btnFehlzeitLschen.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnFehlzeitLschen.setBounds(422, 371, 285, 50);
-		panelfz.add(btnFehlzeitLschen);
 		
 		JLabel lblBeiSontigeBitte = new JLabel("bei sontige bitte ausf\u00FCllen");
 		lblBeiSontigeBitte.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -774,6 +805,7 @@ public class GUI extends JFrame {
 		
 	}
 	
+	//Fehlgrund suchen
 	private int sucheGrund(String fehlgrund) {
 		int wert = 0;
 		for(int i = 0; i < grundarray.length; i++) {
