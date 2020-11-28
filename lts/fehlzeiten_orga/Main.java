@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class Main {
@@ -304,6 +305,10 @@ protected void removeLehrer (String tmpname){
                 return j;
             }
         }
+    }
+    
+    public static void sortier() {
+    	Collections.sort(lehrerList , new SortLehrer()); 
     }
     
     

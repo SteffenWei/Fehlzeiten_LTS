@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTabbedPane;
 import javax.swing.DefaultComboBoxModel;
@@ -22,6 +21,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -242,6 +243,7 @@ public class GUI extends JFrame {
 						plztxt.getText(), strassetxt.getText(), telnrtxt.getText(), mailtxt.getText());
 				System.out.println(Main.lehrerList.get(0).getVname());
 				System.out.println("Lehrer "+ nnametxt.getText() +" gespeichert");
+				Main.sortier();
 			}else {
 				int position = Main.position(krzltxt.getText());
 				Lehrer tmpLehrer = new Lehrer(nnametxt.getText(), vnametxt.getText(), krzltxt.getText(), persnrtxt.getText(),
@@ -249,7 +251,7 @@ public class GUI extends JFrame {
 				
 				Main.lehrerList.remove(position);
 				Main.lehrerList.add(position, tmpLehrer);
-				
+				Main.sortier();
 			}
 				
 			}
@@ -263,7 +265,7 @@ public class GUI extends JFrame {
 		krzlctxt1.setBounds(142, 11, 200, 59);
 		panellul.add(krzlctxt1);
 		
-		//Lehrerdaten einsatzen
+		//Lehrerdaten einsetzen
 		JButton btnEinsetzen = new JButton("einsetzen");
 		btnEinsetzen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -301,6 +303,7 @@ public class GUI extends JFrame {
 				if(!(krzltxt.getText().equals(""))) {
 					int position = Main.position(krzltxt.getText());
 					Main.lehrerList.remove(position);
+					Main.sortier();
 				}				
 			}
 		});
