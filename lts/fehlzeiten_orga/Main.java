@@ -362,6 +362,22 @@ protected void removeLehrer (String tmpname){
 		
 		return vorhanden;
 	}
+	
+	public static void emptylist() {
+		for(int i = 0; i < lehrerList.size(); i++)
+		try {
+		    lehrerList.get(i);
+		} catch ( IndexOutOfBoundsException e ) {
+		    lehrerList.add(i, lehrerList.get(i+1) );
+		    i=0;
+		}
+		
+	}
+
+	public static void druckenFzListe(String tmpkrzl, Date date2) {
+		// TODO Auto-generated method stub
+		
+	}
 
     
 }

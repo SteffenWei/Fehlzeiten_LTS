@@ -51,6 +51,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.Panel;
 
 
 
@@ -66,6 +67,7 @@ public class GUI extends JFrame {
 	public JComboBox krzlctxt1 = new JComboBox();
 	public JComboBox krzlctxt1_fz = new JComboBox();
 	public JComboBox fzload = new JComboBox();
+	public JComboBox krzlctxt_druck = new JComboBox();
 	public Object[] arraypers;
 	public List<String> personri = new ArrayList<String>();
 	public List<String> krzlri = new ArrayList<String>();
@@ -100,6 +102,7 @@ public class GUI extends JFrame {
 	private JTextField txtTagVo;
 	private JTextField txtTagBis;
 	private JTextField txtStdBis;
+	private JTextField txtdatum_druck;
 
 //Start des Programms
 	public static void main(String[] args) {
@@ -304,6 +307,7 @@ public class GUI extends JFrame {
 					int position = Main.position(krzltxt.getText());
 					Main.lehrerList.remove(position);
 					Main.sortier();
+					Main.emptylist();
 				}				
 			}
 		});
@@ -608,6 +612,16 @@ public class GUI extends JFrame {
 		persontxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		persontxt.setBounds(390, 23, 200, 59);
 		panelfz.add(persontxt);
+		krzlctxt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				datumvontxt.setText("");
+				datumbistxt.setText("");
+				stundevontxt.setText("");
+				stundebistxt.setText("");
+				grundsonstigetxt.setText("");
+				grundtxt.setSelectedIndex(0);
+			}
+		});
 		
 		krzlctxt.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		krzlctxt.setBounds(163, 23, 200, 59);
@@ -696,6 +710,59 @@ public class GUI extends JFrame {
 		lblOderFrWeitere.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblOderFrWeitere.setBounds(600, 115, 244, 37);
 		panelfz.add(lblOderFrWeitere);
+		
+		Panel druckausgabe = new Panel();
+		tabbedPane.addTab("Drucken", null, druckausgabe, "");
+		tabbedPane.setBackgroundAt(5, SystemColor.menu);
+		druckausgabe.setLayout(null);
+		
+		
+		krzlctxt_druck.setBounds(33, 11, 210, 59);
+		krzlctxt_druck.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		druckausgabe.add(krzlctxt_druck);
+		
+		JButton btndruckLuLLaden = new JButton("Fehlzeiten laden");
+		btndruckLuLLaden.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Methode Fehlzeiten von einem LuL in Tabelle auf der Seite Drucken einfügen
+				
+			}
+		});
+		btndruckLuLLaden.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		btndruckLuLLaden.setBounds(286, 19, 190, 45);
+		druckausgabe.add(btndruckLuLLaden);
+		
+		JButton btndruck = new JButton("Drucken");
+		btndruck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Methode Drucken wird aufgerufen
+				String tmpkrzl = (String) krzlctxt_druck.getSelectedItem();
+				Date date2 = null;
+				try {
+					date2 = new SimpleDateFormat("dd.MM.yyyy").parse(txtdatum_druck.getText());
+				} catch (ParseException e1) {
+					e1.printStackTrace();}
+				
+				Main.druckenFzListe(tmpkrzl, date2);
+				
+			}
+		});
+		btndruck.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		btndruck.setBounds(286, 95, 190, 45);
+		druckausgabe.add(btndruck);
+		
+		txtdatum_druck = new JTextField();
+		txtdatum_druck.setToolTipText("TT.MM.JJJJ");
+		txtdatum_druck.setBounds(74, 95, 169, 45);
+		druckausgabe.add(txtdatum_druck);
+		txtdatum_druck.setColumns(10);
+		
+		JLabel lblDruckenAb = new JLabel("ab");
+		lblDruckenAb.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblDruckenAb.setBounds(32, 101, 32, 32);
+		druckausgabe.add(lblDruckenAb);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 133, 22);
@@ -863,6 +930,7 @@ public class GUI extends JFrame {
 		krzlctxt1.setModel(new DefaultComboBoxModel(arraykrzl));
 		
 		krzlctxt1_fz.setModel(new DefaultComboBoxModel(arraykrzl));
+		krzlctxt_druck.setModel(new DefaultComboBoxModel(arraykrzl));
 		
 		// Methode zum Einfügen der Fehlzeiten noch eintragen
 		
