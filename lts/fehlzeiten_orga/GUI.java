@@ -52,6 +52,7 @@ import javax.swing.JPopupMenu;
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.Panel;
+import javax.swing.table.TableModel;
 
 
 
@@ -712,6 +713,7 @@ public class GUI extends JFrame {
 		panelfz.add(lblOderFrWeitere);
 		
 		Panel druckausgabe = new Panel();
+		druckausgabe.setBackground(SystemColor.menu);
 		tabbedPane.addTab("Drucken", null, druckausgabe, "");
 		tabbedPane.setBackgroundAt(5, SystemColor.menu);
 		druckausgabe.setLayout(null);
@@ -727,6 +729,9 @@ public class GUI extends JFrame {
 				
 				//Methode Fehlzeiten von einem LuL in Tabelle auf der Seite Drucken einfügen
 				
+				fehlzeitenSuchen();
+				
+				
 			}
 		});
 		btndruckLuLLaden.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -738,14 +743,7 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Methode Drucken wird aufgerufen
-				String tmpkrzl = (String) krzlctxt_druck.getSelectedItem();
-				Date date2 = null;
-				try {
-					date2 = new SimpleDateFormat("dd.MM.yyyy").parse(txtdatum_druck.getText());
-				} catch (ParseException e1) {
-					e1.printStackTrace();}
-				
-				Main.druckenFzListe(tmpkrzl, date2);
+				fehlzeitenSuchen();
 				
 			}
 		});
@@ -900,6 +898,19 @@ public class GUI extends JFrame {
 		}
 		return wert;
 	}
+	
+	//Methode für Liste und Druck der Fehlzeiten
+	private void fehlzeitenSuchen() {
+		String tmpkrzl = (String) krzlctxt_druck.getSelectedItem();
+		Date date2 = null;
+		try {
+			date2 = new SimpleDateFormat("dd.MM.yyyy").parse(txtdatum_druck.getText());
+		} catch (ParseException e1) {
+			e1.printStackTrace();}
+		
+		Main.druckenFzListe(tmpkrzl, date2);
+	}
+	
 	
 	public void setup(){
 		tablesetup();

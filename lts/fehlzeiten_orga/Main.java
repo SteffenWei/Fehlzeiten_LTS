@@ -26,8 +26,12 @@ import java.util.Date;
 
 public class Main {
 
+	//Enthaelt die angelegten Lehrer
 	public static List<Lehrer> lehrerList = new ArrayList<Lehrer>();
 	private static final String endsign = System.getProperty("line.separator");
+	
+	//Enthaelt die Indexwerte für den Druck der Fehlzeiten eines LuL-Objekts
+	public static List<Integer> indexDruck = new ArrayList();
 
 	/*public static void main(String args[]) {
 
@@ -375,7 +379,17 @@ protected void removeLehrer (String tmpname){
 	}
 
 	public static void druckenFzListe(String tmpkrzl, Date date2) {
-		// TODO Auto-generated method stub
+			
+		Lehrer tmpLehrer = searchkrzl(tmpkrzl);
+		indexDruck.clear();
+		
+		
+		//Daten mit späterem Zeitpunkt finden
+		for(int i= 0; i < tmpLehrer.getFlist().size();i++) {
+			if(tmpLehrer.getFlist().get(i).getFehltagevon().compareTo(date2)>0) {
+				indexDruck.add(i);
+			}
+		}
 		
 	}
 
