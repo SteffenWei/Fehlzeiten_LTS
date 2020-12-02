@@ -59,8 +59,10 @@ import javax.swing.table.TableModel;
 public class GUI extends JFrame {
 	public String col[] = {"Name","Tage","Grund", "Personalnr", "Stunden", "Kürzel"};
 	public String col2[] = {"Vorname", "Nachname", "Kürzel", "Personalnr", "PLZ", "Straße", "TelNr.", "Mail"};
+	public String col3[] = {"Name","Tage","Grund", "Personalnr", "Stunden", "Kürzel"};
 	public DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 	public DefaultTableModel tableModel2 = new DefaultTableModel(col2, 0);
+	public DefaultTableModel tableModel3 = new DefaultTableModel(col3, 0);
 	public String[] grundarray = {"Krankheit", "Tod eines Familienmitglieds", "Umzug aus dienstl. Gründen", "Arbeitsjubiläum", "Schwere Erkrankung Angehöriger, betreute Person" , "Fortbildung" , "Ausübung öffentlicher Ehrenämter" , "Ausbildung von LiV" , "sonstige"};
 	public JComboBox persontxt = new JComboBox();
 	public JComboBox krzlctxt = new JComboBox();
@@ -74,6 +76,8 @@ public class GUI extends JFrame {
 	public List<String> krzlri = new ArrayList<String>();
 	public List<String> fehlzeitri = new ArrayList<String>();
 	private JPanel contentPane;
+	private JScrollPane druckausgabe = new JScrollPane();
+	private JScrollPane fzlullist = new JScrollPane();
 	private JTextField datumvontxt;
 	private JTextField datumbistxt;
 	private JTextField stundevontxt;
@@ -82,6 +86,7 @@ public class GUI extends JFrame {
 	private JTextField textField;
 	private JTable table_1;
 	private JTable table_2;
+	private JTable table_3;
 	private JTextField vnametxt;
 	private JTextField nnametxt;
 	private JTextField strassetxt;
@@ -577,6 +582,9 @@ public class GUI extends JFrame {
 		
 		table_2 = new JTable(tableModel2);
 		scrollPanelull.setViewportView(table_2);
+		
+		table_3 = new JTable(tableModel3);
+		fzlullist.setViewportView(table_3);
 
 		
 		
@@ -712,7 +720,7 @@ public class GUI extends JFrame {
 		lblOderFrWeitere.setBounds(600, 115, 244, 37);
 		panelfz.add(lblOderFrWeitere);
 		
-		Panel druckausgabe = new Panel();
+		
 		druckausgabe.setBackground(SystemColor.menu);
 		tabbedPane.addTab("Drucken", null, druckausgabe, "");
 		tabbedPane.setBackgroundAt(5, SystemColor.menu);
@@ -761,6 +769,10 @@ public class GUI extends JFrame {
 		lblDruckenAb.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblDruckenAb.setBounds(32, 101, 32, 32);
 		druckausgabe.add(lblDruckenAb);
+		
+		
+		fzlullist.setBounds(20,200,820,300);
+		druckausgabe.add(fzlullist);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 133, 22);
