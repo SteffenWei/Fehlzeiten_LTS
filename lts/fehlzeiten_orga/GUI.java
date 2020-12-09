@@ -58,8 +58,8 @@ import javax.swing.table.TableModel;
 
 public class GUI extends JFrame {
 	public String col[] = {"Name","Tage","Grund", "Personalnr", "Stunden", "Kürzel"};
-	public String col2[] = {"Vorname", "Nachname", "Kürzel", "Personalnr", "PLZ", "Straße", "TelNr.", "Mail"};
-	public String col3[] = {"Name","Tage","Grund", "Personalnr", "Stunden", "Kürzel"};
+	public String col2[] = {"Vorname", "Nachname", "Kürzel", "Personalnr.", "PLZ", "Straße", "TelNr.", "Mail"};
+	public String col3[] = {"Kürzel","Tage","Grund","Stunden"};
 	public DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 	public DefaultTableModel tableModel2 = new DefaultTableModel(col2, 0);
 	public DefaultTableModel tableModel3 = new DefaultTableModel(col3, 0);
@@ -735,9 +735,36 @@ public class GUI extends JFrame {
 		btndruckLuLLaden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//Methode Fehlzeiten von einem LuL in Tabelle auf der Seite Drucken einfügen
+				while(tableModel3.getRowCount() > 0) {
+					  tableModel3.removeRow(0);
+					}
+				
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 				
 				fehlzeitenSuchen();
+				String tmpselectedkrzl = (String) krzlctxt_druck.getSelectedItem();
+				
+				for(int i=0; i<Main.indexDruck.size();i++){
+					Fehlzeiten fztmp2 = Main.searchkrzl(tmpselectedkrzl).getFlist().get(Main.indexDruck.get(i));
+					
+					String grund2temp;
+	            	   if(fztmp2.getFehlgrund().contentEquals("sonstige")) {
+	            		   if(fztmp2.getGrundsonstige().contentEquals("")){
+	            			   grund2temp = "sonstige";
+	            		   }else{
+	            		   grund2temp = fztmp2.getGrundsonstige();
+	            		   }
+	            	   }else {
+	            		   grund2temp = fztmp2.getFehlgrund();
+	            	   }
+					
+					Object[] tbltemp3 = {tmpselectedkrzl, simpleDateFormat.format(fztmp2.getFehltagevon()) + " bis " + simpleDateFormat.format(fztmp2.getFehltagebis()), 
+	            			   grund2temp ,fztmp2.getFehlstundenvon() + " bis " + fztmp2.getFehlstundenbis()};
+	            	   
+	            	   tableModel3.addRow(tbltemp3);
+				}
+				
+				
 				
 				
 			}
