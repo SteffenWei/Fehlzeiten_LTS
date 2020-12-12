@@ -715,7 +715,7 @@ public class GUI extends JFrame {
 		lblBeiSontigeBitte.setBounds(600, 82, 244, 37);
 		panelfz.add(lblBeiSontigeBitte);
 		
-		JLabel lblOderFrWeitere = new JLabel("Informationen  bitte ausf\u00FCllen");
+		JLabel lblOderFrWeitere = new JLabel("Informationen bitte ausf\u00FCllen");
 		lblOderFrWeitere.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblOderFrWeitere.setBounds(600, 115, 244, 37);
 		panelfz.add(lblOderFrWeitere);
